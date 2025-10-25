@@ -1,137 +1,113 @@
-import sys
-from PySide6.QtWidgets import (
-    QApplication, QWidget, QVBoxLayout,
-    QLabel, QRadioButton, QPushButton,
-    QMessageBox, QButtonGroup
-)
-from PySide6.QtGui import QPainter, QColor, QFont
-from PySide6.QtCore import Qt, QRect, QTimer
-class MotorSportQuiz(QWidget) :
-    """This will be the main class for my motorsport quiz app"""
+import pygame, sys, random
+from main_menu import Menu
+
+class MotorSportQuiz:
     def __init__(self):
-        """Initiate the games assets and resources"""
-        super().__init__()
-        self.setWindowTitle("Motorsport Quiz")
-        self.resize(800, 600)
-        self.setStyleSheet("background-color: black;")
+        pygame.init()
+        self.width, self.height = 800, 600
+        self.screen = pygame.display.set_mode((self.width, self.height))
+        pygame.display.set_caption("Grand Prix Trivia")
 
-        # Quiz Data
+        # Fonts & Colors
+        self.fonts = {
+            "title": pygame.font.Font(None, 60),
+            "question": pygame.font.Font(None, 40),
+            "option": pygame.font.Font(None, 36)
+        }
+        self.colors = {
+            "WHITE": (255, 255, 255),
+            "BLACK": (0, 0, 0),
+            "RED": (200, 50, 50),
+            "GREEN": (50, 200, 50),
+            "BLUE": (70, 130, 180),
+            "GREY": (180, 180, 180)
+        }
+
+        # Game states
+        self.STATE_MENU = "menu"
+        self.STATE_PLAYING = "playing"
+        self.STATE_SCORE = "score"
+        self.state = self.STATE_MENU
+
+        # Questions
         self.questions = [
-            {
-                "question" : "Which F1 driver won the drivers championship in 2024?",
-                "options" : ["Lewis Hamilton", "Max Verstappen", "Piere Gasly", "Sebastian Vettel"],
-                "answer" : "Max Verstappen"
-            },
-            {
-                "question" : "Who was the last driver that won a WDC for Mclaren?",
-                "options" : ["Lewis Hamilton", "Lando Norris", "Ayrton Senna", "Checo Perez"],
-                "answer" : "Lewis Hamilton"
-            }
+            {"question": "Who won the 2023 Formula 1 World Championship?", "options": ["Lewis Hamilton", "Max Verstappen", "Charles Leclerc", "Lando Norris"], "answer": 1},
+            {"question": "Which circuit features the Eau Rouge corner?", "options": ["Monza", "Spa-Francorchamps", "Silverstone", "Suzuka"], "answer": 1},
+            {"question": "What color flag signals the end of a race?", "options": ["Yellow", "Red", "Checkered", "Green"], "answer": 2}
         ]
-        
+        random.shuffle(self.questions)
+        self.current_question = 0
         self.score = 0
-        self.current_index = 0
+        self.clock = pygame.time.Clock()
 
-        # Buttons for answers
-        self.buttons = []
-        for i in range(4):
-            btn = QPushButton(self)
-            btn.setGeometry(QRect(250, 300 + i * 60, 300, 50))
-            btn.setStyleSheet("""
-                QPushButton {
-                    background-color: #2e8b57;
-                    color: white;
-                    font-size: 18px;
-                    border-radius: 10px;
-                }
-                QPushButton:hover {
-                    background-color: #3cb371;
-                }
-            """)
-            btn.clicked.connect(self.check_answer)
-            self.buttons.append(btn)
+        # Menu instance
+        self.menu_screen_obj = Menu(self.screen, self.width, self.height, self.fonts, self.colors, self.start_quiz)
 
-        # Set the boolean flags with starting states
-        self.lights_out = False
-        self.box_box = True
-        self.game_muted = False
+    # --- Quiz & Score Screens ---
+    def draw_text(self, text, font, color, x, y):
+        text_obj = font.render(text, True, color)
+        text_rect = text_obj.get_rect(center=(x, y))
+        self.screen.blit(text_obj, text_rect)
 
-        self.load_question()
-
-    def load_question(self):
-        """Load the current question and update button"""
-        if self.current_index >= len(self.questions):
-            self.end_quiz()
-            return
-        
-        q = self.questions[self.current_index]
-        self.current_question = q["question"]
-        self.correct_answer = q["answer"]
-
-        for i, option in enumerate(q["options"]):
-            self.buttons[i].setText(option)
-
-        self.update() # Refresh Display
-
-    def check_answer(self):
-        """Check if the selected answer is correct"""
-        sender = self.sender()
-        answer = sender.text()
-
-        if answer == self.correct_answer:
-            sender.setStyleSheet("background-color: #228b22; color: white;font-size: 18px; border-radius: 10px;")
-            self.score += 1
+    def draw_button(self, text, x, y, w, h, color, hover_color, action=None):
+        mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+        if x + w > mouse[0] > x and y + h > mouse[1] > y:
+            pygame.draw.rect(self.screen, hover_color, (x, y, w, h))
+            if click[0] == 1 and action is not None:
+                pygame.time.wait(200)
+                action()
         else:
-            sender.setStyleSheet("background-color: #b22222; color: white; font-size: 18px; border-radius: 10px;")
-        
-        # Move to the next question after a short delay
-        QApplication.instance().processEvents()
-        self.repaint()
-        self.current_index += 1
-        QTimer.singleShot(1000, self.load_question)
+            pygame.draw.rect(self.screen, color, (x, y, w, h))
+        self.draw_text(text, self.fonts["option"], self.colors["WHITE"], x + w / 2, y + h / 2)
 
-    def show_result(self):
-        QMessageBox.information (
-            self,
-            "Quiz Finished",
-            f"Your final score: {self.score}/{len(self.questions)}"
-        )
-        self.close()
+    def start_quiz(self):
+        self.state = self.STATE_PLAYING
+        self.current_question = 0
+        self.score = 0
 
-    def draw_event(self, event):
-        """Draw background and text"""
-        painter = QPainter(self)
+    def handle_answer(self, selected):
+        correct = self.questions[self.current_question]["answer"]
+        if selected == correct:
+            self.score += 1
+        self.current_question += 1
+        if self.current_question >= len(self.questions):
+            self.state = self.STATE_SCORE
 
-        #set bg colour
-        painter.fillRect(self.rect(), QColor("#1e1e1e"))
+    def quiz_screen(self):
+        self.screen.fill(self.colors["BLACK"])
+        q = self.questions[self.current_question]
+        self.draw_text(q["question"], self.fonts["question"], self.colors["WHITE"], self.width / 2, 100)
+        for i, option in enumerate(q["options"]):
+            self.draw_button(option, self.width / 2 - 150, 200 + i * 80, 300, 60, self.colors["BLUE"], self.colors["GREEN"], lambda i=i: self.handle_answer(i))
 
-        # Draw text
-        painter.setPen(Qt.white)
-        painter.setFont(QFont("Ariel", 24, QFont.bold))
-        painter.drawText(200, 200, "Hello placeholder")
+    def score_screen(self):
+        self.screen.fill(self.colors["BLACK"])
+        self.draw_text("Quiz Complete!", self.fonts["title"], self.colors["WHITE"], self.width / 2, self.height / 3)
+        self.draw_text(f"Score: {self.score}/{len(self.questions)}", self.fonts["question"], self.colors["GREEN"], self.width / 2, self.height / 2)
+        self.draw_button("Play Again", self.width / 2 - 100, self.height / 2 + 100, 200, 60, self.colors["BLUE"], self.colors["GREEN"], self.start_quiz)
+        self.draw_button("Quit", self.width / 2 - 100, self.height / 2 + 180, 200, 60, self.colors["RED"], self.colors["GREY"], sys.exit)
 
-        #Current question
-        painter.setFont(QFont("Arial", 20))
-        if hasattr(self, "current_question"):
-            painter.drawText(50, 200, self.current_question)
+    # --- Main Loop ---
+    def run(self):
+        running = True
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
 
-        painter.setFont(QFont("Consolas", 20))
-        painter.drawText(QFont(650, 50, f"Score: {self.score}"))
+            if self.state == self.STATE_MENU:
+                self.menu_screen_obj.render()
+            elif self.state == self.STATE_PLAYING:
+                self.quiz_screen()
+            elif self.state == self.STATE_SCORE:
+                self.score_screen()
 
-    def end_quiz(self):
-        """End the quiz and display score"""
-        for btn in self.buttons:
-            btn.hide()
-        self.current_question = f"Quiz complete! Final Score: {self.score}/{len(self.questions)}"
-        self.update()
-        QTimer.singleShot(2000, self.show_result)
+            pygame.display.flip()
+            self.clock.tick(30)
 
+        pygame.quit()
+        sys.exit()
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = MotorSportQuiz()
-    window.show()
-    sys.exit(app.exec())
-
-    
-
+    MotorSportQuiz().run()

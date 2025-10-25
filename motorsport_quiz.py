@@ -1,4 +1,4 @@
-import pygame, sys, random
+import pygame, sys, random, json
 from main_menu import Menu
 from quiz import Quiz
 from score import ScoreScreen
@@ -31,12 +31,10 @@ class MotorSportQuiz:
         self.STATE_SCORE = "points"
         self.state = self.STATE_MENU
 
-        # Questions
-        self.questions = [
-            {"question": "Who won the 2023 Formula 1 World Championship?", "options": ["Lewis Hamilton", "Max Verstappen", "Charles Leclerc", "Lando Norris"], "answer": 1},
-            {"question": "Which circuit features the Eau Rouge corner?", "options": ["Monza", "Spa-Francorchamps", "Silverstone", "Suzuka"], "answer": 1},
-            {"question": "What color flag signals the end of a race?", "options": ["Yellow", "Red", "Checkered", "Green"], "answer": 2}
-        ]
+        #Read questions from JSON and store in variable questions
+        with open("questions.json", "r", encoding="utf-8") as q:
+            self.questions = json.load(q)
+
         random.shuffle(self.questions)
 
         # Screens
@@ -47,7 +45,7 @@ class MotorSportQuiz:
         self.clock = pygame.time.Clock()
 
     def start_quiz(self):
-        random.shuffle(self.questions)  # Shuffle new order each time
+        random.shuffle(self.questions)
         self.quiz_screen_obj = Quiz(
             self.screen,
             self.width,

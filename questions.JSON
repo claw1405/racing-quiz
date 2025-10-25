@@ -1,0 +1,17 @@
+[
+    {
+        "question": "Who won the 2023 Formula 1 World Championship?",
+        "options": ["Lewis Hamilton", "Max Verstappen", "Charles Leclerc", "Lando Norris"],
+        "answer": 1
+    },
+    {
+        "question": "Which circuit features the Eau Rouge corner?",
+        "options": ["Monza", "Spa-Francorchamps", "Silverstone", "Suzuka"],
+        "answer": 1
+    },
+    {
+        "question": "What color flag signals the end of a race?",
+        "options": ["Yellow", "Red", "Checkered", "Green"],
+        "answer": 2
+    }
+]

@@ -2,11 +2,17 @@ import pygame, sys, random
 from main_menu import Menu
 
 class MotorSportQuiz:
+    """This is the main overarching class for my motorsport quiz"""
     def __init__(self):
+        """Initiate all attributes used throughout the motorsport quiz"""
         pygame.init()
+
+        # Set up the surface
         self.width, self.height = 800, 600
         self.screen = pygame.display.set_mode((self.width, self.height))
-        pygame.display.set_caption("Grand Prix Trivia")
+
+        #This is the window title
+        pygame.display.set_caption("Grand Prix Trivia") 
 
         # Fonts & Colors
         self.fonts = {
@@ -24,9 +30,9 @@ class MotorSportQuiz:
         }
 
         # Game states
-        self.STATE_MENU = "menu"
-        self.STATE_PLAYING = "playing"
-        self.STATE_SCORE = "score"
+        self.STATE_MENU = "box box"
+        self.STATE_PLAYING = "lights out"
+        self.STATE_SCORE = "points"
         self.state = self.STATE_MENU
 
         # Questions
@@ -35,9 +41,11 @@ class MotorSportQuiz:
             {"question": "Which circuit features the Eau Rouge corner?", "options": ["Monza", "Spa-Francorchamps", "Silverstone", "Suzuka"], "answer": 1},
             {"question": "What color flag signals the end of a race?", "options": ["Yellow", "Red", "Checkered", "Green"], "answer": 2}
         ]
-        random.shuffle(self.questions)
+        random.shuffle(self.questions) # Output questions in a random order
+
         self.current_question = 0
         self.score = 0
+        self.mouse_clicked = False  # Track mouse clicks
         self.clock = pygame.time.Clock()
 
         # Menu instance
@@ -51,14 +59,19 @@ class MotorSportQuiz:
 
     def draw_button(self, text, x, y, w, h, color, hover_color, action=None):
         mouse = pygame.mouse.get_pos()
-        click = pygame.mouse.get_pressed()
+        click = pygame.mouse.get_pressed()[0]
         if x + w > mouse[0] > x and y + h > mouse[1] > y:
             pygame.draw.rect(self.screen, hover_color, (x, y, w, h))
-            if click[0] == 1 and action is not None:
-                pygame.time.wait(200)
+            if click and not self.mouse_clicked and action is not None:
                 action()
+            self.mouse_clicked = click
         else:
             pygame.draw.rect(self.screen, color, (x, y, w, h))
+
+        # Update click state when mouse is not over button
+        if not click:
+            self.mouse_clicked = False
+
         self.draw_text(text, self.fonts["option"], self.colors["WHITE"], x + w / 2, y + h / 2)
 
     def start_quiz(self):

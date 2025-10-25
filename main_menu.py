@@ -11,6 +11,8 @@ class Menu:
         self.colors = colors
         self.start_quiz = start_action
 
+        self.mouse_clicked = False # Flag to track mouse clicks
+
     def draw_text(self, text, font, color, x, y):
         text_obj = font.render(text, True, color)
         text_rect = text_obj.get_rect(center=(x, y))
@@ -18,14 +20,18 @@ class Menu:
 
     def draw_button(self, text, x, y, w, h, color, hover_color, action=None):
         mouse = pygame.mouse.get_pos()
-        click = pygame.mouse.get_pressed()
+        click = pygame.mouse.get_pressed()[0]
         if x + w > mouse[0] > x and y + h > mouse[1] > y:
             pygame.draw.rect(self.screen, hover_color, (x, y, w, h))
-            if click[0] == 1 and action is not None:
-                pygame.time.wait(200)
+            if click and not self.mouse_clicked and action is not None:
                 action()
+            self.mouse_clicked = click
         else:
             pygame.draw.rect(self.screen, color, (x, y, w, h))
+
+        if not click:
+            self.mouse_clicked = False
+
         self.draw_text(text, self.font_option, self.colors["WHITE"], x + w / 2, y + h / 2)
 
     def render(self):

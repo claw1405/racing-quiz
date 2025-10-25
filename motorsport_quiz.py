@@ -47,8 +47,16 @@ class MotorSportQuiz:
         self.clock = pygame.time.Clock()
 
     def start_quiz(self):
-        self.quiz_screen_obj.current_question = 0
-        self.quiz_screen_obj.score = 0
+        random.shuffle(self.questions)  # Shuffle new order each time
+        self.quiz_screen_obj = Quiz(
+            self.screen,
+            self.width,
+            self.height,
+            self.fonts,
+            self.colors,
+            self.questions,
+            self.finish_quiz
+        )
         self.state = self.STATE_PLAYING
 
     def finish_quiz(self, score):

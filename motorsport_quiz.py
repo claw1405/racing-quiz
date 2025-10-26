@@ -32,8 +32,8 @@ class MotorSportQuiz:
         self.state = self.STATE_MENU
 
         #Read questions from JSON and store in variable questions
-        with open("questions.json", "r", encoding="utf-8") as q:
-            self.questions = json.load(q)
+        with open("questions/f1.json", "r", encoding="utf-8") as f1:
+            self.questions = json.load(f1)
 
         random.shuffle(self.questions)
 

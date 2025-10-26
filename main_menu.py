@@ -38,7 +38,7 @@ class Menu:
 
     def render(self):
         self.screen.fill(self.colors["BLACK"])
-        self.draw_text("🏁 Grand Prix Trivia 🏁", self.font_title, self.colors["WHITE"], self.width / 2, self.height / 3)
+        self.draw_text("Grand Prix Trivia", self.font_title, self.colors["WHITE"], self.width / 2, self.height / 3)
 
         #Category buttons
         categories = [("F1", "questions/f1.json"), ("Rally", "questions/rally.json"), ("MotoGP", "questions/moto.json"), ("Endurance", "questions/endurance.json")]

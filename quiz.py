@@ -15,10 +15,34 @@ class Quiz:
         self.click_released = True
 
 
-    def draw_text(self, text, font, color, x, y):
-        text_obj = font.render(text, True, color)
-        text_rect = text_obj.get_rect(center=(x, y))
-        self.screen.blit(text_obj, text_rect)
+    def draw_text(self, text, font, color, x, y, max_width=None, line_spacing=5):
+        """Draw text on screen at position (x, y). wraps text if max width is set"""
+        if max_width is None:
+            text_obj = font.render(text, True, color)
+            text_rect = text_obj.get_rect(center=(x, y))
+            self.screen.blit(text_obj, text_rect)
+            return
+        
+        # Wrap text
+        words = text.split(' ')
+        lines = []
+        current_line = ''
+        for word in words:
+            test_line = current_line + (' ' if current_line else '') + word
+            if font.size(test_line)[0] <= max_width:
+                current_line = test_line
+            else:
+                lines.append(current_line)
+                current_line = word
+        lines.append(current_line)
+
+        # Draw each line centered at x
+        total_height = len(lines) * font.get_height() + (len(lines) - 1) * line_spacing
+        start_y = y - total_height / 2
+        for i, line in enumerate(lines):
+            text_obj = font.render(line, True, color)
+            text_rect = text_obj.get_rect(center=(x, start_y + i * (font.get_height() + line_spacing)))
+            self.screen.blit(text_obj, text_rect)
 
     def draw_button(self, text, x, y, w, h, color, hover_color, action=None):
         mouse = pygame.mouse.get_pos()
@@ -52,7 +76,7 @@ class Quiz:
 
         self.screen.fill(self.colors["BLACK"])
         q = self.questions[self.current_question]
-        self.draw_text(q["question"], self.fonts["question"], self.colors["WHITE"], self.width / 2, 100)
+        self.draw_text(q["question"], self.fonts["question"], self.colors["WHITE"], self.width / 2, 100, max_width=600)
 
         # Display current score at top-right corner
         score_text = f"Points: {self.score}/{len(self.questions)}"

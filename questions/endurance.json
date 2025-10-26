@@ -1,0 +1,27 @@
+[
+  {
+    "question": "Which team won the 2023 24 Hours of Le Mans?",
+    "options": ["Toyota Gazoo Racing", "Peugeot Sport", "Audi Sport", "Porsche GT Team"],
+    "answer": 0
+  },
+  {
+    "question": "What does LMP stand for in endurance racing classes?",
+    "options": ["Le Mans Prototype", "Long Motorsports Performance", "Lightweight Motorsport Project", "Le Mans Production"],
+    "answer": 0
+  },
+  {
+    "question": "Which endurance race is considered part of the Triple Crown of Motorsport?",
+    "options": ["24 Hours of Le Mans", "Monaco GP", "Daytona 24 Hours", "Isle of Man TT"],
+    "answer": 0
+  },
+  {
+    "question": "Endurance races typically require how many drivers per car?",
+    "options": ["1", "2-3", "3-4", "4-5"],
+    "answer": 2
+  },
+  {
+    "question": "Which type of tire strategy is critical in endurance racing?",
+    "options": ["One-stop sprint", "Regular pit cycles with driver changes", "Qualifying tires only", "No pit stops"],
+    "answer": 1
+  }
+]

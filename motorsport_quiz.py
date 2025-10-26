@@ -26,26 +26,31 @@ class MotorSportQuiz:
         }
 
         # States
-        self.STATE_MENU = "box box"
-        self.STATE_PLAYING = "lights out"
-        self.STATE_SCORE = "points"
+        self.STATE_MENU = "menu"
+        self.STATE_PLAYING = "playing"
+        self.STATE_SCORE = "score"
         self.state = self.STATE_MENU
-
-        #Read questions from JSON and store in variable questions
-        with open("questions/f1.json", "r", encoding="utf-8") as f1:
-            self.questions = json.load(f1)
-
-        random.shuffle(self.questions)
 
         # Screens
         self.menu_screen_obj = Menu(self.screen, self.width, self.height, self.fonts, self.colors, self.start_quiz)
-        self.quiz_screen_obj = Quiz(self.screen, self.width, self.height, self.fonts, self.colors, self.questions, self.finish_quiz)
+        self.quiz_screen_obj = None
         self.score_screen_obj = None
 
+        self.questions = []  # Current category questions
         self.clock = pygame.time.Clock()
 
-    def start_quiz(self):
+    def start_quiz(self, json_path):
+        # Load questions for selected category
+        try:
+            with open(json_path, "r", encoding="utf-8") as f:
+                self.questions = json.load(f)
+        except Exception as e:
+            print(f"Error loading {json_path}: {e}")
+            return
+
         random.shuffle(self.questions)
+
+        # Create new quiz screen
         self.quiz_screen_obj = Quiz(
             self.screen,
             self.width,
@@ -55,11 +60,24 @@ class MotorSportQuiz:
             self.questions,
             self.finish_quiz
         )
+
         self.state = self.STATE_PLAYING
 
     def finish_quiz(self, score):
-        self.score_screen_obj = ScoreScreen(self.screen, self.width, self.height, self.fonts, self.colors, score, len(self.questions), self.start_quiz)
+        self.score_screen_obj = ScoreScreen(
+            self.screen,
+            self.width,
+            self.height,
+            self.fonts,
+            self.colors,
+            score,
+            len(self.questions),
+            self.menu_back_to_menu
+        )
         self.state = self.STATE_SCORE
+
+    def menu_back_to_menu(self):
+        self.state = self.STATE_MENU
 
     def run(self):
         running = True
@@ -68,11 +86,12 @@ class MotorSportQuiz:
                 if event.type == pygame.QUIT:
                     running = False
 
+            # Render the current screen based on state
             if self.state == self.STATE_MENU:
                 self.menu_screen_obj.render()
-            elif self.state == self.STATE_PLAYING:
+            elif self.state == self.STATE_PLAYING and self.quiz_screen_obj:
                 self.quiz_screen_obj.render()
-            elif self.state == self.STATE_SCORE and self.score_screen_obj is not None:
+            elif self.state == self.STATE_SCORE and self.score_screen_obj:
                 self.score_screen_obj.render()
 
             pygame.display.flip()

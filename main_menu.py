@@ -10,6 +10,8 @@ class Menu:
         self.font_option = fonts["option"]
         self.colors = colors
         self.start_quiz = start_action
+        self.start_quiz_callback = start_action
+
 
         self.mouse_clicked = False # Flag to track mouse clicks
 
@@ -37,5 +39,11 @@ class Menu:
     def render(self):
         self.screen.fill(self.colors["BLACK"])
         self.draw_text("🏁 Grand Prix Trivia 🏁", self.font_title, self.colors["WHITE"], self.width / 2, self.height / 3)
-        self.draw_button("Start Quiz", self.width / 2 - 100, self.height / 2, 200, 60, self.colors["BLUE"], self.colors["GREEN"], self.start_quiz)
+
+        #Category buttons
+        categories = [("F1", "questions/f1.json"), ("Rally", "questions/rally.json"), ("MotoGP", "questions/moto.json"), ("Endurance", "questions/endurance.json")]
+        for i, (name, path) in enumerate(categories):
+            self.draw_button(name, self.width / 2 - 100, 250 + i*80, 200, 60, self.colors["BLUE"], self.colors["GREEN"], lambda path=path: self.start_quiz_callback(path))
+
+       
         self.draw_button("Quit", self.width / 2 - 100, self.height / 2 + 80, 200, 60, self.colors["RED"], self.colors["GREY"], sys.exit)

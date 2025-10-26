@@ -1,0 +1,27 @@
+[
+  {
+    "question": "Who won the 2023 World Rally Championship (WRC)?",
+    "options": ["Sébastien Ogier", "Kalle Rovanperä", "Thierry Neuville", "Elfyn Evans"],
+    "answer": 1
+  },
+  {
+    "question": "Which country hosts the famous Monte Carlo Rally?",
+    "options": ["France", "Monaco", "Italy", "Spain"],
+    "answer": 1
+  },
+  {
+    "question": "What type of surface is typical for the Rally Finland?",
+    "options": ["Gravel", "Tarmac", "Snow", "Sand"],
+    "answer": 0
+  },
+  {
+    "question": "What does 'P.S.' stand for in rally terminology?",
+    "options": ["Pit Stop", "Power Stage", "Performance Sector", "Primary Stage"],
+    "answer": 1
+  },
+  {
+    "question": "Which manufacturer has historically dominated the WRC with cars like the Impreza and WRX?",
+    "options": ["Ford", "Toyota", "Subaru", "Citroën"],
+    "answer": 2
+  }
+]

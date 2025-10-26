@@ -1,0 +1,27 @@
+[
+  {
+    "question": "Who won the 2023 MotoGP World Championship?",
+    "options": ["Marc Márquez", "Francesco Bagnaia", "Fabio Quartararo", "Joan Mir"],
+    "answer": 1
+  },
+  {
+    "question": "Which circuit is famous for the 'Corkscrew' turn?",
+    "options": ["Phillip Island", "Laguna Seca", "Misano", "Silverstone"],
+    "answer": 1
+  },
+  {
+    "question": "What color flag signals the end of a race in MotoGP?",
+    "options": ["Red", "Checkered", "Yellow", "Blue"],
+    "answer": 1
+  },
+  {
+    "question": "Which manufacturer did Valentino Rossi ride for in 2004?",
+    "options": ["Yamaha", "Honda", "Suzuki", "Ducati"],
+    "answer": 1
+  },
+  {
+    "question": "Who is nicknamed 'The Doctor' in MotoGP?",
+    "options": ["Casey Stoner", "Valentino Rossi", "Marc Márquez", "Jorge Lorenzo"],
+    "answer": 1
+  }
+]

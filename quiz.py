@@ -48,7 +48,7 @@ class Quiz:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()[0]
 
-        hovered =  x + w > mouse[0] > x and y + h > mouse[1] > y
+        hovered = x + w > mouse[0] > x and y + h > mouse[1] > y
         current_colour = hover_color if hovered else color
         pygame.draw.rect(self.screen, current_colour, (x, y, w, h))
 
@@ -56,11 +56,17 @@ class Quiz:
             action()
             self.click_released = False
 
-        # Reset the flag when the mouse button is released
         if not click:
             self.click_released = True
 
-        self.draw_text(text, self.fonts["option"], self.colors["WHITE"], x + w / 2, y + h / 2)
+        font = self.fonts["option"]
+        text_width = font.size(text)[0]
+        while text_width > w - 10 and font.get_height() > 10:
+            font = pygame.font.Font(None, font.get_height() - 1)
+            text_width = font.size(text)[0]
+
+        self.draw_text(text, font, self.colors["WHITE"], x + w / 2, y + h / 2)
+
 
     def handle_answer(self, selected):
         correct = self.questions[self.current_question]["answer"]

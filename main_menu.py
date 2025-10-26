@@ -38,12 +38,44 @@ class Menu:
 
     def render(self):
         self.screen.fill(self.colors["BLACK"])
-        self.draw_text("Grand Prix Trivia", self.font_title, self.colors["WHITE"], self.width / 2, self.height / 3)
 
-        #Category buttons
-        categories = [("F1", "questions/f1.json"), ("Rally", "questions/rally.json"), ("MotoGP", "questions/moto.json"), ("Endurance", "questions/endurance.json")]
+        top_margin = 100  # space from top of screen
+        spacing = 80      # vertical spacing between buttons
+        button_height = 60
+
+        # Draw title
+        self.draw_text("Grand Prix Trivia", self.font_title, self.colors["WHITE"], self.width / 2, top_margin)
+
+        # Category buttons
+        categories = [
+            ("F1", "questions/f1.json"),
+            ("Rally", "questions/rally.json"),
+            ("MotoGP", "questions/moto.json"),
+            ("Endurance", "questions/endurance.json")
+        ]
         for i, (name, path) in enumerate(categories):
-            self.draw_button(name, self.width / 2 - 100, 250 + i*80, 200, 60, self.colors["BLUE"], self.colors["GREEN"], lambda path=path: self.start_quiz_callback(path))
+            y = top_margin + 80 + i * spacing  # move buttons below title
+            self.draw_button(
+            name,
+            self.width / 2 - 100,
+            y,
+            200,
+            button_height,
+            self.colors["BLUE"],
+            self.colors["GREEN"],
+            lambda path=path: self.start_quiz_callback(path)
+        )
 
-       
-        self.draw_button("Quit", self.width / 2 - 100, self.height / 2 + 80, 200, 60, self.colors["RED"], self.colors["GREY"], sys.exit)
+        # Quit button below last category
+        quit_y = top_margin + 80 + len(categories) * spacing
+        self.draw_button(
+            "Quit",
+            self.width / 2 - 100,
+            quit_y,
+            200,
+            button_height,
+            self.colors["RED"],
+            self.colors["GREY"],
+            sys.exit
+        )
+

@@ -1,14 +1,13 @@
 import pygame, time, random
 
 class Quiz:
-    """This class will handle question displays, options and answer selection"""
+    """Handles question displays, answer selection, timer, and feedback."""
     def __init__(self, screen, width, height, fonts, colors, questions, finish_callback):
         self.screen = screen
         self.width = width
         self.height = height
         self.fonts = fonts
         self.colors = colors
-        self.questions = questions
         self.finish_callback = finish_callback
         self.current_question = 0
         self.score = 0
@@ -24,6 +23,10 @@ class Quiz:
         self.time_limit = 20
         self.start_time = time.time()
 
+        # Feedback
+        self.feedback = None  # tuple (text, color)
+        self.feedback_time = 0
+
     def reset_timer(self):
         self.start_time = time.time()
 
@@ -32,7 +35,7 @@ class Quiz:
         return max(0, self.time_limit - int(elapsed))
 
     def draw_text(self, text, font, color, x, y, max_width=None, line_spacing=5):
-        """Draw text on screen at position (x, y). wraps text if max width is set"""
+        """Draw text at (x, y). Wraps if max_width set."""
         if max_width is None:
             text_obj = font.render(text, True, color)
             text_rect = text_obj.get_rect(center=(x, y))
@@ -52,7 +55,7 @@ class Quiz:
                 current_line = word
         lines.append(current_line)
 
-        # Draw each line centered at x
+        # Draw each line centered
         total_height = len(lines) * font.get_height() + (len(lines) - 1) * line_spacing
         start_y = y - total_height / 2
         for i, line in enumerate(lines):
@@ -83,23 +86,40 @@ class Quiz:
 
         self.draw_text(text, font, self.colors["WHITE"], x + w / 2, y + h / 2)
 
-
     def handle_answer(self, selected):
-        correct = self.questions[self.current_question]["answer"]
-        if selected == correct:
-            self.score += 1
-        self.current_question += 1
+        correct_index = self.questions[self.current_question]["answer"]
+        correct_text = self.questions[self.current_question]["options"][correct_index]
 
-        if self.current_question >= len(self.questions):
-            self.finish_callback(self.score)
-        else :
-            self.reset_timer()
+        if selected == correct_index:
+            self.score += 1
+            self.feedback = ("Correct!", self.colors["GREEN"])
+        else:
+            self.feedback = (f"Incorrect! Correct: {correct_text}", self.colors["RED"])
+        
+        self.feedback_time = time.time()
 
     def render(self):
+        # --- Feedback display ---
+        if self.feedback:
+            if time.time() - self.feedback_time < 1.5:  # Show for 1.5s
+                self.screen.fill(self.colors["BLACK"])
+                text, color = self.feedback
+                self.draw_text(text, self.fonts["question"], color, self.width / 2, self.height / 2)
+                pygame.display.flip()
+                return
+            else:
+                self.feedback = None
+                self.current_question += 1
+                if self.current_question >= len(self.questions):
+                    self.finish_callback(self.score)
+                    return
+                else:
+                    self.reset_timer()
+
         if self.current_question >= len(self.questions):
             return  # Nothing to render
-    
-       # --- Timer logic ---
+
+        # --- Timer logic ---
         time_left = self.get_time_left()
         if time_left <= 0:
             # Time's up — move to next question
@@ -108,48 +128,33 @@ class Quiz:
                 self.finish_callback(self.score)
                 return
             else:
-                self.reset_timer()  # reset timer only for the next question
+                self.reset_timer()
                 time_left = self.time_limit
 
         # --- Draw UI ---
         self.screen.fill(self.colors["BLACK"])
         q = self.questions[self.current_question]
 
-        # Question text
-        self.draw_text(
-            q["question"],
-            self.fonts["question"],
-            self.colors["WHITE"],
-            self.width / 2,
-            100,
-            max_width=600
-        )
+        # Question
+        self.draw_text(q["question"], self.fonts["question"], self.colors["WHITE"], self.width / 2, 100, max_width=600)
 
-        # Timer display — big, centered at the top
+        # Timer display (top left)
         timer_color = self.colors["GREEN"]
         if time_left <= 10:
-            timer_color = (255, 215, 0)  # Yellow when under 10s
+            timer_color = (255, 215, 0)  # Yellow
         if time_left <= 5:
-            timer_color = self.colors["RED"]  # Red when under 5s
-
+            timer_color = self.colors["RED"]  # Red
+        padding = 20
         timer_text = f"Time Left: {time_left}s"
-        padding = 20  # distance from screen edges
-        self.draw_text(timer_text, self.fonts["option"], timer_color, padding + self.fonts["title"].size(timer_text)[0]/2, padding + self.fonts["title"].get_height()/2)
+        self.draw_text(timer_text, self.fonts["option"], timer_color,
+                       padding + self.fonts["option"].size(timer_text)[0]/2,
+                       padding + self.fonts["option"].get_height()/2)
 
-
-        # Score display (top left)
+        # Score display (top right)
         score_text = f"Points: {self.score}/{len(self.questions)}"
         self.draw_text(score_text, self.fonts["option"], self.colors["GREEN"], self.width - 120, 30)
 
         # Answer buttons
         for i, option in enumerate(q["options"]):
-            self.draw_button(
-                option,
-                self.width / 2 - 150,
-                200 + i * 80,
-                300,
-                60,
-                self.colors["BLUE"],
-                self.colors["GREEN"],
-                lambda i=i: self.handle_answer(i)
-            )
+            self.draw_button(option, self.width / 2 - 150, 200 + i * 80, 300, 60,
+                             self.colors["BLUE"], self.colors["GREEN"], lambda i=i: self.handle_answer(i))

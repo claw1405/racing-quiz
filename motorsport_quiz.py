@@ -53,6 +53,7 @@ class MotorSportQuiz:
             return
 
         random.shuffle(self.questions)
+        self.questions = self.questions[:20]
  
         # Create new quiz screen
         self.quiz_screen_obj = Quiz(

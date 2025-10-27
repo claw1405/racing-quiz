@@ -128,7 +128,7 @@ class Quiz:
 
         timer_text = f"Time Left: {time_left}s"
         padding = 20  # distance from screen edges
-        self.draw_text(timer_text, self.fonts["title"], timer_color, padding + self.fonts["title"].size(timer_text)[0]/2, padding + self.fonts["title"].get_height()/2)
+        self.draw_text(timer_text, self.fonts["option"], timer_color, padding + self.fonts["title"].size(timer_text)[0]/2, padding + self.fonts["title"].get_height()/2)
 
 
         # Score display (top left)

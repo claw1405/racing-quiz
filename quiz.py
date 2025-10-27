@@ -1,4 +1,4 @@
-import pygame, time
+import pygame, time, random
 
 class Quiz:
     """This class will handle question displays, options and answer selection"""
@@ -13,6 +13,12 @@ class Quiz:
         self.current_question = 0
         self.score = 0
         self.click_released = True
+
+        # Limit to 20 random questions
+        if len(questions) > 20:
+            self.questions = random.sample(questions, 20)
+        else:
+            self.questions = questions
 
         # Timer
         self.time_limit = 20

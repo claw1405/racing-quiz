@@ -1,4 +1,4 @@
-import pygame, sys, random, json
+import pygame, sys, random, json, time
 from main_menu import Menu
 from quiz import Quiz
 from score import ScoreScreen
@@ -39,6 +39,10 @@ class MotorSportQuiz:
         self.questions = []  # Current category questions
         self.clock = pygame.time.Clock()
 
+        # Timer settings
+        self.time_limit = 20
+        self.start_time = time.time() # Holds the time started for each question
+
     def start_quiz(self, json_path):
         # Load questions for selected category
         try:
@@ -49,7 +53,7 @@ class MotorSportQuiz:
             return
 
         random.shuffle(self.questions)
-
+ 
         # Create new quiz screen
         self.quiz_screen_obj = Quiz(
             self.screen,
@@ -62,6 +66,14 @@ class MotorSportQuiz:
         )
 
         self.state = self.STATE_PLAYING
+
+    
+    def reset_timer(self):
+        self.start_time = time.time()
+
+    def get_time_left(self):
+        elapsed = time.time() - self.start_time
+        return max(0, self.time_limit - int(elapsed))
 
     def finish_quiz(self, score):
         self.score_screen_obj = ScoreScreen(

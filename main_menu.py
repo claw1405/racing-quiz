@@ -39,43 +39,54 @@ class Menu:
     def render(self):
         self.screen.fill(self.colors["BLACK"])
 
-        top_margin = 100  # space from top of screen
-        spacing = 80      # vertical spacing between buttons
-        button_height = 60
-
-        # Draw title
-        self.draw_text("Grand Prix Trivia", self.font_title, self.colors["WHITE"], self.width / 2, top_margin)
-
-        # Category buttons
         categories = [
             ("F1", "questions/f1.json"),
             ("Rally", "questions/rally.json"),
             ("MotoGP", "questions/moto.json"),
             ("Endurance", "questions/endurance.json")
         ]
-        for i, (name, path) in enumerate(categories):
-            y = top_margin + 80 + i * spacing  # move buttons below title
+
+        button_height = 60
+        spacing = 20  # space between buttons
+        total_items = 1 + len(categories) + 1  # title + categories + quit
+
+        # Calculate total height of all items
+        title_height = self.font_title.get_height()
+        buttons_height = len(categories) * button_height
+        quit_height = button_height
+        total_height = title_height + spacing + buttons_height + spacing + quit_height + spacing * (len(categories) + 1)
+
+        # Start y to vertically center everything
+        start_y = (self.height - total_height) / 2
+
+        # Draw title
+        self.draw_text("Grand Prix Trivia", self.font_title, self.colors["WHITE"], self.width / 2, start_y + title_height / 2)
+
+        # Draw category buttons
+        current_y = start_y + title_height + spacing
+        for name, path in categories:
             self.draw_button(
             name,
             self.width / 2 - 100,
-            y,
+            current_y,
             200,
             button_height,
             self.colors["BLUE"],
             self.colors["GREEN"],
             lambda path=path: self.start_quiz_callback(path)
         )
+            current_y += button_height + spacing
 
-        # Quit button below last category
-        quit_y = top_margin + 80 + len(categories) * spacing
+        # Draw Quit button
         self.draw_button(
             "Quit",
             self.width / 2 - 100,
-            quit_y,
+            current_y,
             200,
             button_height,
             self.colors["RED"],
             self.colors["GREY"],
             sys.exit
         )
+
 

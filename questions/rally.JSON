@@ -1,27 +1,102 @@
 [
-  {
-    "question": "Who won the 2023 World Rally Championship (WRC)?",
-    "options": ["Sébastien Ogier", "Kalle Rovanperä", "Thierry Neuville", "Elfyn Evans"],
-    "answer": 1
-  },
-  {
-    "question": "Which country hosts the famous Monte Carlo Rally?",
-    "options": ["France", "Monaco", "Italy", "Spain"],
-    "answer": 1
-  },
-  {
-    "question": "What type of surface is typical for the Rally Finland?",
-    "options": ["Gravel", "Tarmac", "Snow", "Sand"],
-    "answer": 0
-  },
-  {
-    "question": "What does 'P.S.' stand for in rally terminology?",
-    "options": ["Pit Stop", "Power Stage", "Performance Sector", "Primary Stage"],
-    "answer": 1
-  },
-  {
-    "question": "Which manufacturer has historically dominated the WRC with cars like the Impreza and WRX?",
-    "options": ["Ford", "Toyota", "Subaru", "Citroën"],
-    "answer": 2
-  }
+    {
+        "question": "Who holds the record for the most World Rally Championship titles?",
+        "options": ["Sébastien Loeb", "Colin McRae", "Carlos Sainz", "Sébastien Ogier"],
+        "answer": 0
+    },
+    {
+        "question": "Which country hosts the Rally Finland, known for its high-speed gravel stages and big jumps?",
+        "options": ["Sweden", "Finland", "Norway", "Estonia"],
+        "answer": 1
+    },
+    {
+        "question": "In which year was the World Rally Championship officially established?",
+        "options": ["1970", "1973", "1975", "1980"],
+        "answer": 1
+    },
+    {
+        "question": "Which legendary Scottish driver won the 1995 World Rally Championship?",
+        "options": ["Richard Burns", "Colin McRae", "Kris Meeke", "David Coulthard"],
+        "answer": 1
+    },
+    {
+        "question": "Which car manufacturer dominated the Group B era with the Quattro?",
+        "options": ["Audi", "Lancia", "Peugeot", "Ford"],
+        "answer": 0
+    },
+    {
+        "question": "What surface is the Rallye Monte Carlo best known for?",
+        "options": ["Tarmac and snow mix", "Full gravel", "Full snow", "Desert sand"],
+        "answer": 0
+    },
+    {
+        "question": "Which driver won eight World Rally Championships between 2013 and 2021?",
+        "options": ["Sébastien Loeb", "Ott Tänak", "Sébastien Ogier", "Thierry Neuville"],
+        "answer": 2
+    },
+    {
+        "question": "What does WRC stand for?",
+        "options": ["World Racing Circuit", "World Rally Championship", "World Rally Cup", "World Road Challenge"],
+        "answer": 1
+    },
+    {
+        "question": "Which country’s rally is famous for its red dust and rough conditions in the WRC?",
+        "options": ["Argentina", "Kenya", "Australia", "Chile"],
+        "answer": 2
+    },
+    {
+        "question": "Which rally event was known for being one of the toughest in the world and returned to WRC in 2021?",
+        "options": ["Safari Rally Kenya", "Acropolis Rally", "Rally Argentina", "Rally Mexico"],
+        "answer": 0
+    },
+    {
+        "question": "What kind of car drivetrain is most commonly used in modern WRC cars?",
+        "options": ["Front-wheel drive", "Rear-wheel drive", "All-wheel drive", "Hybrid front-wheel drive"],
+        "answer": 2
+    },
+    {
+        "question": "Which manufacturer produced the famous Lancia Delta Integrale?",
+        "options": ["Lancia", "Peugeot", "Subaru", "Toyota"],
+        "answer": 0
+    },
+    {
+        "question": "Which driver tragically lost his life in a helicopter crash in 2007, shocking the rally world?",
+        "options": ["Colin McRae", "Richard Burns", "Henri Toivonen", "Ken Block"],
+        "answer": 0
+    },
+    {
+        "question": "What does a rally co-driver primarily do?",
+        "options": ["Fix the car during stages", "Read pace notes to the driver", "Control tire pressures", "Monitor lap times"],
+        "answer": 1
+    },
+    {
+        "question": "Which Japanese manufacturer was behind the famous Impreza WRC car?",
+        "options": ["Toyota", "Nissan", "Mitsubishi", "Subaru"],
+        "answer": 3
+    },
+    {
+        "question": "What type of tyres are used in the Rally Sweden?",
+        "options": ["Gravel tyres", "Snow tyres with studs", "Intermediate tyres", "Tarmac slicks"],
+        "answer": 1
+    },
+    {
+        "question": "Which driver became famous for his Gymkhana videos and rally career?",
+        "options": ["Ken Block", "Petter Solberg", "Sébastien Ogier", "Mikko Hirvonen"],
+        "answer": 0
+    },
+    {
+        "question": "The ‘Flying Finns’ nickname refers to drivers from which country known for rally dominance?",
+        "options": ["Sweden", "Finland", "Norway", "Estonia"],
+        "answer": 1
+    },
+    {
+        "question": "Which car did Colin McRae drive to his 1995 World Rally title?",
+        "options": ["Subaru Impreza 555", "Ford Focus RS", "Peugeot 206 WRC", "Lancia Delta Integrale"],
+        "answer": 0
+    },
+    {
+        "question": "What is the name of the rally team founded by Ken Block in 2010?",
+        "options": ["Monster World Rally Team", "Hoonigan Racing Division", "Block Rally Sport", "DC Racing"],
+        "answer": 1
+    }
 ]

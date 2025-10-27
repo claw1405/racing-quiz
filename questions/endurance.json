@@ -1,27 +1,102 @@
 [
-  {
-    "question": "Which team won the 2023 24 Hours of Le Mans?",
-    "options": ["Toyota Gazoo Racing", "Peugeot Sport", "Audi Sport", "Porsche GT Team"],
-    "answer": 0
-  },
-  {
-    "question": "What does LMP stand for in endurance racing classes?",
-    "options": ["Le Mans Prototype", "Long Motorsports Performance", "Lightweight Motorsport Project", "Le Mans Production"],
-    "answer": 0
-  },
-  {
-    "question": "Which endurance race is considered part of the Triple Crown of Motorsport?",
-    "options": ["24 Hours of Le Mans", "Monaco GP", "Daytona 24 Hours", "Isle of Man TT"],
-    "answer": 0
-  },
-  {
-    "question": "Endurance races typically require how many drivers per car?",
-    "options": ["1", "2-3", "3-4", "4-5"],
-    "answer": 2
-  },
-  {
-    "question": "Which type of tire strategy is critical in endurance racing?",
-    "options": ["One-stop sprint", "Regular pit cycles with driver changes", "Qualifying tires only", "No pit stops"],
-    "answer": 1
-  }
+    {
+        "question": "Which famous 24-hour race takes place at the Circuit de la Sarthe?",
+        "options": ["24 Hours of Nürburgring", "24 Hours of Daytona", "24 Hours of Le Mans", "Spa 24 Hours"],
+        "answer": 2
+    },
+    {
+        "question": "Which manufacturer has won the most 24 Hours of Le Mans overall titles?",
+        "options": ["Porsche", "Audi", "Ferrari", "Toyota"],
+        "answer": 0
+    },
+    {
+        "question": "In which country is the Spa 24 Hours endurance race held?",
+        "options": ["France", "Belgium", "Germany", "Italy"],
+        "answer": 1
+    },
+    {
+        "question": "What does WEC stand for in endurance racing?",
+        "options": ["World Endurance Championship", "World Engine Competition", "World Elite Cup", "World Energy Challenge"],
+        "answer": 0
+    },
+    {
+        "question": "Which car manufacturer introduced the TS050 Hybrid for endurance racing?",
+        "options": ["Nissan", "Toyota", "Mazda", "Honda"],
+        "answer": 1
+    },
+    {
+        "question": "Which American race is considered the opening round of the IMSA WeatherTech Championship?",
+        "options": ["12 Hours of Sebring", "Petit Le Mans", "24 Hours of Daytona", "6 Hours of Watkins Glen"],
+        "answer": 2
+    },
+    {
+        "question": "What class replaced LMP1 in the FIA World Endurance Championship in 2021?",
+        "options": ["LMDh", "Hypercar", "GT3", "Prototype Evo"],
+        "answer": 1
+    },
+    {
+        "question": "Which legendary driver has won the 24 Hours of Le Mans nine times?",
+        "options": ["Tom Kristensen", "Jacky Ickx", "Allan McNish", "Emanuele Pirro"],
+        "answer": 0
+    },
+    {
+        "question": "What type of race is the 12 Hours of Sebring?",
+        "options": ["Street race", "Endurance race", "Sprint race", "Drag race"],
+        "answer": 1
+    },
+    {
+        "question": "Which manufacturer won Le Mans with the GT40 in the 1960s?",
+        "options": ["Ferrari", "Porsche", "Ford", "Aston Martin"],
+        "answer": 2
+    },
+    {
+        "question": "What fuel technology do many modern endurance prototypes use?",
+        "options": ["Diesel-electric hybrid", "Pure petrol", "Hydrogen", "Bioethanol"],
+        "answer": 0
+    },
+    {
+        "question": "Which race completes the endurance ‘Triple Crown’ alongside Le Mans and Monaco?",
+        "options": ["Indianapolis 500", "Daytona 500", "Spa 24 Hours", "Bathurst 1000"],
+        "answer": 0
+    },
+    {
+        "question": "Which British manufacturer won Le Mans in 2003 with the Bentley Speed 8?",
+        "options": ["McLaren", "Bentley", "Aston Martin", "Jaguar"],
+        "answer": 1
+    },
+    {
+        "question": "How long does the 6 Hours of Fuji race last?",
+        "options": ["6 hours", "8 hours", "10 hours", "12 hours"],
+        "answer": 0
+    },
+    {
+        "question": "Which brand’s R18 e-tron quattro dominated Le Mans in the early 2010s?",
+        "options": ["Porsche", "Toyota", "Audi", "Peugeot"],
+        "answer": 2
+    },
+    {
+        "question": "In endurance racing, what does ‘double stinting tyres’ mean?",
+        "options": ["Using the same tyres for two driver stints", "Driving two stints without refueling", "Racing two events in a row", "Changing tyres twice in one stop"],
+        "answer": 0
+    },
+    {
+        "question": "What is the name of the night-time endurance race held in Georgia, USA?",
+        "options": ["Petit Le Mans", "Mid-Ohio 6 Hours", "Road America 500", "Sebring Sprint"],
+        "answer": 0
+    },
+    {
+        "question": "Which driver famously won Le Mans for Toyota after multiple near misses?",
+        "options": ["Fernando Alonso", "Kazuki Nakajima", "Mike Conway", "Kamui Kobayashi"],
+        "answer": 1
+    },
+    {
+        "question": "What does the acronym LMDh stand for?",
+        "options": ["Le Mans Daytona hybrid", "Lightweight Motorsport Design hybrid", "Long-distance Motorsport hybrid", "Le Mans Development hybrid"],
+        "answer": 0
+    },
+    {
+        "question": "What time of day does the 24 Hours of Le Mans traditionally start?",
+        "options": ["Noon", "3 PM", "4 PM", "Midnight"],
+        "answer": 1 
+    }
 ]

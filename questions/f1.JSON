@@ -1,17 +1,108 @@
 [
     {
-        "question": "Who won the 2023 Formula 1 World Championship?",
+        "question": "Which team has won the most Constructors’ Championships in Formula 1?",
+        "options": ["Ferrari", "Mercedes", "McLaren", "Red Bull"],
+        "answer": 0
+    },
+    {
+        "question": "In which year was the first Formula 1 World Championship held?",
+        "options": ["1946", "1950", "1952", "1954"],
+        "answer": 1
+    },
+    {
+        "question": "Who won the 2023 Formula 1 Drivers’ Championship?",
         "options": ["Lewis Hamilton", "Max Verstappen", "Charles Leclerc", "Lando Norris"],
         "answer": 1
     },
     {
-        "question": "Which circuit features the Eau Rouge corner?",
-        "options": ["Monza", "Spa-Francorchamps", "Silverstone", "Suzuka"],
+        "question": "Which Grand Prix is traditionally known as the 'jewel in the crown' of Formula 1?",
+        "options": ["Monaco Grand Prix", "Italian Grand Prix", "British Grand Prix", "Singapore Grand Prix"],
+        "answer": 0
+    },
+    {
+        "question": "What type of engine configuration do current F1 cars use?",
+        "options": ["V8", "V10", "V6 Turbo Hybrid", "Inline-4"],
+        "answer": 2
+    },
+    {
+        "question": "Who was the first ever Formula 1 World Champion?",
+        "options": ["Juan Manuel Fangio", "Alberto Ascari", "Giuseppe Farina", "Stirling Moss"],
+        "answer": 2
+    },
+    {
+        "question": "What does the term ‘DRS’ stand for in Formula 1?",
+        "options": ["Drag Reduction System", "Downforce Regulation Setup", "Dynamic Race Strategy", "Driver Response System"],
+        "answer": 0
+    },
+    {
+        "question": "Which circuit hosts the British Grand Prix?",
+        "options": ["Silverstone", "Brands Hatch", "Donington Park", "Goodwood"],
+        "answer": 0
+    },
+    {
+        "question": "Who is the youngest driver ever to start a Formula 1 race?",
+        "options": ["Sebastian Vettel", "Lando Norris", "Max Verstappen", "Charles Leclerc"],
+        "answer": 2
+    },
+    {
+        "question": "Which driver famously said, 'If you no longer go for a gap that exists, you’re no longer a racing driver'?",
+        "options": ["Ayrton Senna", "Michael Schumacher", "Lewis Hamilton", "Niki Lauda"],
+        "answer": 0
+    },
+    {
+        "question": "How many points does a driver get for finishing 1st place in a Grand Prix?",
+        "options": ["25", "20", "18", "30"],
+        "answer": 0
+    },
+    {
+        "question": "Which country hosts the Suzuka Circuit?",
+        "options": ["Japan", "China", "South Korea", "Malaysia"],
+        "answer": 0
+    },
+    {
+        "question": "Which F1 team uses the 'Silver Arrows' nickname?",
+        "options": ["Mercedes", "McLaren", "Aston Martin", "Williams"],
+        "answer": 0
+    },
+    {
+        "question": "Who won the dramatic 2008 Formula 1 World Championship by a single point?",
+        "options": ["Felipe Massa", "Lewis Hamilton", "Kimi Räikkönen", "Fernando Alonso"],
         "answer": 1
     },
     {
-        "question": "What color flag signals the end of a race?",
-        "options": ["Yellow", "Red", "Checkered", "Green"],
+        "question": "At which circuit did Ayrton Senna win his first Formula 1 race?",
+        "options": ["Estoril", "Monaco", "Interlagos", "Donington Park"],
+        "answer": 0
+    },
+    {
+        "question": "What color flag indicates the end of a Formula 1 race?",
+        "options": ["Red", "Yellow", "Checkered", "Green"],
         "answer": 2
+    },
+    {
+        "question": "Which team did Max Verstappen make his Formula 1 debut with?",
+        "options": ["Red Bull Racing", "Toro Rosso", "Mercedes", "Sauber"],
+        "answer": 1
+    },
+    {
+        "question": "Who was the last driver to win a championship for Ferrari?",
+        "options": ["Fernando Alonso", "Kimi Räikkönen", "Sebastian Vettel", "Charles Leclerc"],
+        "answer": 1
+    },
+    {
+        "question": "Which F1 track is nicknamed 'The Temple of Speed'?",
+        "options": ["Spa-Francorchamps", "Monza", "Silverstone", "Imola"],
+        "answer": 1
+    },
+    {
+        "question": "What team did Jenson Button win the 2009 championship with?",
+        "options": ["Mercedes", "Williams", "Brawn GP", "McLaren"],
+        "answer" : 2
+    },
+    {
+        "question":"Who won back to back championships in 2005 and 2006 breaking Schumacher's domination?",
+        "options": ["Lewis Hamilton", "Alain Prost", "Sebastian Vettel", "Fernando Alonso"],
+        "answer": 3
     }
 ]
+

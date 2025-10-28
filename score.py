@@ -43,13 +43,7 @@ class ScoreScreen:
     def render(self):
         """Render the users score as well as the play again and quit buttons"""
         self.screen.fill(self.colors["BLACK"])
-        self.draw_text("Quiz Complete!", self.fonts["title"], self.colors["WHITE"],
-                        self.width / 2, self.height / 3)
-        self.draw_text(f"Score: {self.score}/{self.total_questions}", 
-            self.fonts["question"], self.colors["GREEN"], self.width / 2, 
-            self.height / 2)
-        self.draw_button("Play Again", self.width / 2 - 100, self.height / 2 + 100,
-                200, 60, self.colors["BLUE"], self.colors["GREEN"], 
-                self.restart_action)
-        self.draw_button("Quit", self.width / 2 - 100, self.height / 2 + 180, 200,
-                        60, self.colors["RED"], self.colors["GREY"], sys.exit)
+        self.draw_text("Quiz Complete!", self.fonts["title"], self.colors["WHITE"], self.width / 2, self.height / 3)
+        self.draw_text(f"Score: {self.score}/{self.total_questions}", self.fonts["question"], self.colors["GREEN"], self.width / 2, self.height / 2)
+        self.draw_button("Play Again", self.width / 2 - 100, self.height / 2 + 100, 200, 60, self.colors["BLUE"], self.colors["GREEN"], self.restart_action)
+        self.draw_button("Quit", self.width / 2 - 100, self.height / 2 + 180, 200, 60, self.colors["RED"], self.colors["GREY"], sys.exit)

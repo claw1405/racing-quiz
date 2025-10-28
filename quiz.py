@@ -3,6 +3,7 @@ import pygame, time, random
 class Quiz:
     """Handles question displays, answer selection, timer, and feedback."""
     def __init__(self, screen, width, height, fonts, colors, questions, finish_callback):
+        """Initialize quiz attributes"""
         self.screen = screen
         self.width = width
         self.height = height

@@ -39,7 +39,6 @@ class Menu:
         self.draw_text(text, self.font_option, self.colors["WHITE"], x + w / 2, y + h / 2)
 
     def render(self):
-        """Render category and quit buttons and position them on screen"""
         self.screen.fill(self.colors["BLACK"])
 
         categories = [
@@ -50,17 +49,12 @@ class Menu:
         ]
 
         button_height = 60
-        spacing = 20  # space between buttons
-        total_items = 1 + len(categories) + 1  # title + categories + quit
-
-        # Calculate total height of all items
+        spacing = 20
         title_height = self.font_title.get_height()
         buttons_height = len(categories) * button_height
         quit_height = button_height
-        total_height = title_height + spacing + buttons_height + spacing ,
-        quit_height + spacing * (len(categories) + 1)
 
-        # Start y to vertically center everything
+        total_height = title_height + spacing + buttons_height + spacing + quit_height + spacing * (len(categories) + 1)
         start_y = (self.height - total_height) / 2
 
         # Draw title
@@ -70,15 +64,15 @@ class Menu:
         current_y = start_y + title_height + spacing
         for name, path in categories:
             self.draw_button(
-            name,
-            self.width / 2 - 100,
-            current_y,
-            200,
-            button_height,
-            self.colors["BLUE"],
-            self.colors["GREEN"],
-            lambda path=path: self.start_quiz_callback(path)
-        )
+                name,
+                self.width / 2 - 100,
+                current_y,
+                200,
+                button_height,
+                self.colors["BLUE"],
+                self.colors["GREEN"],
+                lambda path=path: self.start_quiz_callback(path)
+            )
             current_y += button_height + spacing
 
         # Draw Quit button
@@ -92,5 +86,6 @@ class Menu:
             self.colors["GREY"],
             sys.exit
         )
+
 
 

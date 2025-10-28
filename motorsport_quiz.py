@@ -37,23 +37,18 @@ class MotorSportQuiz:
         self.state = self.STATE_MENU
 
         # Screens
-        self.menu_screen_obj = Menu(self.screen, self.width, self.height, 
-                self.fonts, self.colors, self.start_quiz)
+        self.menu_screen_obj = Menu(self.screen, self.width, self.height, self.fonts, self.colors, self.start_quiz)
         self.quiz_screen_obj = None
         self.score_screen_obj = None
 
         self.questions = []  # Current category questions
         self.clock = pygame.time.Clock()
 
-        # Timer settings
-        self.time_limit = 20
-
-        # Holds the time started for each question
-        self.start_time = time.time() 
+        self.max_questions = 20
 
     def start_quiz(self, json_path):
-        """Determine apps behavior when a new instance of the quiz app is
-        instantiated."""
+        """Load questions from JSON, shuffle them, and start the quiz with up to 
+        20 questions."""
 
         # Load questions for selected category
         try:
@@ -66,7 +61,7 @@ class MotorSportQuiz:
         # randomly shuffle the questions in the relevant Json file and only pick 
         # 20 questions per round
         random.shuffle(self.questions)
-        self.questions = self.questions[:20]
+        self.questions = self.questions[:self.max_questions]
  
         # Create new quiz screen
         self.quiz_screen_obj = Quiz(
@@ -80,15 +75,6 @@ class MotorSportQuiz:
         )
 
         self.state = self.STATE_PLAYING # set state to playing
-    
-    def reset_timer(self):
-        """Class to reset timer for each new question"""
-        self.start_time = time.time()
-
-    def get_time_left(self):
-        """Calculate the time a user has left to answer a question"""
-        elapsed = time.time() - self.start_time
-        return max(0, self.time_limit - int(elapsed))
 
     def finish_quiz(self, score):
         """Once quiz is completed output the users score and end the quiz"""
@@ -118,13 +104,13 @@ class MotorSportQuiz:
                 if event.type == pygame.QUIT: 
                     running = False
 
-            # Render the current screen based on state
-            if self.state == self.STATE_MENU:
-                self.menu_screen_obj.render()
-            elif self.state == self.STATE_PLAYING and self.quiz_screen_obj:
-                self.quiz_screen_obj.render()
-            elif self.state == self.STATE_SCORE and self.score_screen_obj:
-                self.score_screen_obj.render()
+                # Render the current screen based on state
+                if self.state == self.STATE_MENU:
+                    self.menu_screen_obj.render()
+                elif self.state == self.STATE_PLAYING and self.quiz_screen_obj:
+                    self.quiz_screen_obj.render()
+                elif self.state == self.STATE_SCORE and self.score_screen_obj:
+                    self.score_screen_obj.render()
 
             pygame.display.flip()
             self.clock.tick(30)

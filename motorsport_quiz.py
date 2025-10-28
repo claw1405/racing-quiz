@@ -1,11 +1,16 @@
+# Imports required by the main MotorSport quiz class
 import pygame, sys, random, json, time
 from main_menu import Menu
 from quiz import Quiz
 from score import ScoreScreen
 
 class MotorSportQuiz:
+    """Main class to handle the running of a motorsport quiz game"""
     def __init__(self):
+        """Initialize all attributes of the quiz using the pygame library"""
         pygame.init()
+
+        # Set up game screen setting dimensions and window title.
         self.width, self.height = 800, 600
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("Grand Prix Trivia")
@@ -32,7 +37,8 @@ class MotorSportQuiz:
         self.state = self.STATE_MENU
 
         # Screens
-        self.menu_screen_obj = Menu(self.screen, self.width, self.height, self.fonts, self.colors, self.start_quiz)
+        self.menu_screen_obj = Menu(self.screen, self.width, self.height, 
+                self.fonts, self.colors, self.start_quiz)
         self.quiz_screen_obj = None
         self.score_screen_obj = None
 
@@ -41,9 +47,14 @@ class MotorSportQuiz:
 
         # Timer settings
         self.time_limit = 20
-        self.start_time = time.time() # Holds the time started for each question
+
+        # Holds the time started for each question
+        self.start_time = time.time() 
 
     def start_quiz(self, json_path):
+        """Determine apps behavior when a new instance of the quiz app is
+        instantiated."""
+
         # Load questions for selected category
         try:
             with open(json_path, "r", encoding="utf-8") as f:
@@ -52,6 +63,8 @@ class MotorSportQuiz:
             print(f"Error loading {json_path}: {e}")
             return
 
+        # randomly shuffle the questions in the relevant Json file and only pick 
+        # 20 questions per round
         random.shuffle(self.questions)
         self.questions = self.questions[:20]
  
@@ -66,17 +79,19 @@ class MotorSportQuiz:
             self.finish_quiz
         )
 
-        self.state = self.STATE_PLAYING
-
+        self.state = self.STATE_PLAYING # set state to playing
     
     def reset_timer(self):
+        """Class to reset timer for each new question"""
         self.start_time = time.time()
 
     def get_time_left(self):
+        """Calculate the time a user has left to answer a question"""
         elapsed = time.time() - self.start_time
         return max(0, self.time_limit - int(elapsed))
 
     def finish_quiz(self, score):
+        """Once quiz is completed output the users score and end the quiz"""
         self.score_screen_obj = ScoreScreen(
             self.screen,
             self.width,
@@ -87,16 +102,20 @@ class MotorSportQuiz:
             len(self.questions),
             self.menu_back_to_menu
         )
-        self.state = self.STATE_SCORE
+        # change state to in score screen rather than playing
+        self.state = self.STATE_SCORE 
 
     def menu_back_to_menu(self):
+        """Return to the main menu"""
         self.state = self.STATE_MENU
 
     def run(self):
+        """Main game loop to be running while state = playing"""
         running = True
         while running:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
+                # End loop once a user chooses to quit
+                if event.type == pygame.QUIT: 
                     running = False
 
             # Render the current screen based on state

@@ -3,6 +3,7 @@ import pygame, sys
 class Menu:
     """Main menu screen"""
     def __init__(self, screen, width, height, fonts, colors, start_action):
+        """Initialize main menu attributes"""
         self.screen = screen
         self.width = width
         self.height = height
@@ -12,15 +13,16 @@ class Menu:
         self.start_quiz = start_action
         self.start_quiz_callback = start_action
 
-
         self.mouse_clicked = False # Flag to track mouse clicks
 
     def draw_text(self, text, font, color, x, y):
+        """Render text to the screen"""
         text_obj = font.render(text, True, color)
         text_rect = text_obj.get_rect(center=(x, y))
         self.screen.blit(text_obj, text_rect)
 
     def draw_button(self, text, x, y, w, h, color, hover_color, action=None):
+        """Draw menu buttons and listen for click events"""
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()[0]
         if x + w > mouse[0] > x and y + h > mouse[1] > y:
@@ -37,6 +39,7 @@ class Menu:
         self.draw_text(text, self.font_option, self.colors["WHITE"], x + w / 2, y + h / 2)
 
     def render(self):
+        """Render category and quit buttons and position them on screen"""
         self.screen.fill(self.colors["BLACK"])
 
         categories = [
@@ -54,7 +57,8 @@ class Menu:
         title_height = self.font_title.get_height()
         buttons_height = len(categories) * button_height
         quit_height = button_height
-        total_height = title_height + spacing + buttons_height + spacing + quit_height + spacing * (len(categories) + 1)
+        total_height = title_height + spacing + buttons_height + spacing ,
+        quit_height + spacing * (len(categories) + 1)
 
         # Start y to vertically center everything
         start_y = (self.height - total_height) / 2

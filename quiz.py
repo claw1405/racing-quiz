@@ -109,11 +109,11 @@ class Quiz:
         self.feedback_time = time.time() 
 
     def render(self):
-        """Render feedback screen for 1.5 seconds and draw all other elements to 
+        """Render feedback screen for 0.7 seconds and draw all other elements to 
         the screen"""
         # --- Feedback display ---
         if self.feedback:
-            if time.time() - self.feedback_time < 1.5:  # Show for 1.5s
+            if time.time() - self.feedback_time < 0.7:  # Show for 1.5s
                 self.screen.fill(self.colors["BLACK"])
                 text, color = self.feedback
                 self.draw_text(text, self.fonts["question"], color, 

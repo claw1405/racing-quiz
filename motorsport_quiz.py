@@ -57,6 +57,9 @@ class MotorSportQuiz:
         "game_over": pygame.mixer.Sound("assets/sounds/gameover.wav"),
         }
 
+        # Set the timer tick volume to 2%
+        self.sounds["timer_tick"].set_volume(0.02)
+
     def start_quiz(self, json_path):
         """Load questions from JSON, shuffle them, and start the quiz with up to 
         20 questions."""

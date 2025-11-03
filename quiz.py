@@ -2,7 +2,7 @@ import pygame, time, random
 
 class Quiz:
     """Handles question displays, answer selection, timer, and feedback."""
-    def __init__(self, screen, width, height, fonts, colors, questions, finish_callback):
+    def __init__(self, screen, width, height, fonts, colors, questions, finish_callback, sounds):
         """Initialize quiz attributes"""
         self.screen = screen
         self.width = width
@@ -13,6 +13,7 @@ class Quiz:
         self.current_question = 0
         self.score = 0
         self.click_released = True
+        self.sounds = sounds
 
         # Limit to 20 random questions
         if len(questions) > 20:
@@ -78,6 +79,7 @@ class Quiz:
 
         # Listen for click events
         if hovered and click and self.click_released:
+            pygame.mixer.Sound.play(self.sounds["click"])
             action()
             self.click_released = False
 
@@ -103,8 +105,11 @@ class Quiz:
         if selected == correct_index:
             self.score += 1
             self.feedback = ("Correct!", self.colors["GREEN"])
+            pygame.mixer.Sound.play(self.sounds["correct"])
+
         else:
             self.feedback = (f"Incorrect! Correct: {correct_text}", self.colors["RED"])
+            pygame.mixer.Sound.play(self.sounds["wrong"])
         
         self.feedback_time = time.time() 
 

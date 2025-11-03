@@ -49,11 +49,7 @@ class MotorSportQuiz:
 
         self.max_questions = 20
 
-        self.asset_loader()
-
-    def asset_loader(self):
-        # Example sound setup
-        sounds = {
+        self.sounds = {
         "correct": pygame.mixer.Sound("assets/sounds/correct.wav"),
         "wrong": pygame.mixer.Sound("assets/sounds/wrong.wav"),
         "click": pygame.mixer.Sound("assets/sounds/click.wav"),
@@ -86,7 +82,8 @@ class MotorSportQuiz:
             self.fonts,
             self.colors,
             self.questions,
-            self.finish_quiz
+            self.finish_quiz,
+            self.sounds
         )
 
         self.state = self.STATE_PLAYING # set state to playing

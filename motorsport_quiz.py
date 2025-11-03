@@ -15,6 +15,9 @@ class MotorSportQuiz:
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("Grand Prix Trivia")
 
+        #Load the mixer
+        pygame.mixer.init()
+
         # Fonts & Colors
         self.fonts = {
             "title": pygame.font.Font(None, 60),
@@ -45,6 +48,18 @@ class MotorSportQuiz:
         self.clock = pygame.time.Clock()
 
         self.max_questions = 20
+
+        self.asset_loader()
+
+    def asset_loader(self):
+        # Example sound setup
+        sounds = {
+        "correct": pygame.mixer.Sound("assets/sounds/correct.wav"),
+        "wrong": pygame.mixer.Sound("assets/sounds/wrong.wav"),
+        "click": pygame.mixer.Sound("assets/sounds/click.wav"),
+        "timer_tick": pygame.mixer.Sound("assets/sounds/tick.wav"),
+        "game_over": pygame.mixer.Sound("assets/sounds/gameover.wav"),
+        }
 
     def start_quiz(self, json_path):
         """Load questions from JSON, shuffle them, and start the quiz with up to 

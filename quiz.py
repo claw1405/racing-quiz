@@ -15,6 +15,12 @@ class Quiz:
         self.click_released = True
         self.sounds = sounds
 
+        # Set individual channels for different sounds to stop them being interrupted
+        pygame.mixer.set_num_channels(8)  # More than enough
+        self.feedback_channel = pygame.mixer.Channel(0)  # For correct/wrong
+        self.timer_channel = pygame.mixer.Channel(1)     # For tick sounds
+        self.click_channel = pygame.mixer.Channel(2)     # For click sounds
+
         # Limit to 20 random questions
         if len(questions) > 20:
             self.questions = random.sample(questions, 20)
@@ -81,7 +87,7 @@ class Quiz:
         pygame.draw.rect(self.screen, current_colour, (x, y, w, h))
 
         # Listen for click events
-        if hovered and click and self.click_released:
+        if hovered and click and self.click_released and not self.feedback:
             pygame.mixer.Sound.play(self.sounds["click"])
             action()
             self.click_released = False
@@ -108,24 +114,28 @@ class Quiz:
         if selected == correct_index:
             self.score += 1
             self.feedback = ("Correct!", self.colors["GREEN"])
-            pygame.mixer.Sound.play(self.sounds["correct"])
+            self.feedback_channel.play(self.sounds["correct"])
 
         else:
             self.feedback = (f"Incorrect! Correct: {correct_text}", self.colors["RED"])
-            pygame.mixer.Sound.play(self.sounds["wrong"])
+            self.feedback_channel.play(self.sounds["wrong"])
         
         self.feedback_time = time.time() 
 
     def render(self):
-        """Render feedback screen for 0.7 seconds and draw all other elements to 
-        the screen"""
+        """Render the quiz: questions, timer, score, and feedback."""
+        if self.current_question >= len(self.questions):
+            return  # Quiz finished, nothing to render
+
+        q = self.questions[self.current_question]
+
         # --- Feedback display ---
         if self.feedback:
-            if time.time() - self.feedback_time < 0.5:
+            if time.time() - self.feedback_time < 0.7:
                 self.screen.fill(self.colors["BLACK"])
                 text, color = self.feedback
                 self.draw_text(text, self.fonts["question"], color, 
-                               self.width / 2, self.height / 2)
+                    self.width / 2, self.height / 2)
                 pygame.display.flip()
                 return
             else:
@@ -137,52 +147,59 @@ class Quiz:
                 else:
                     self.reset_timer()
 
-        if self.current_question >= len(self.questions):
-            return  # Nothing to render
+        q = self.questions[self.current_question]  # Refresh current question after feedback
 
         # --- Timer logic ---
         time_left = self.get_time_left()
 
-        # Only play tick sound if the second changed
-        if time_left != self.last_time_displayed and not self.feedback:
+        # Only play tick sound if the second changed and not during feedback
+        if time_left != self.last_time_displayed:
             self.last_time_displayed = time_left
-            if "timer_tick" in self.sounds:
-                self.sounds["timer_tick"].play()
+            if "timer_tick" in self.sounds and not self.feedback:
+               self.timer_channel.play(self.sounds["timer_tick"])
 
-        # Time's up — move to next question only once
-        if time_left <= 0:
-            self.feedback = (f"Time's up! Correct: {q['options'][q['answer']]}", self.colors["RED"])
+
+        # Time's up — show feedback once
+        if time_left <= 0 and not self.feedback:
+            correct_index = q["answer"]
+            correct_text = q["options"][correct_index]
+            self.feedback = (f"Time's up! Correct: {correct_text}", self.colors["RED"])
             self.feedback_time = time.time()
-            return  # Show feedback for this question before advancing
-
+            return  # Wait to show feedback
 
         # --- Draw UI ---
         self.screen.fill(self.colors["BLACK"])
-        q = self.questions[self.current_question]
 
         # Question
         self.draw_text(q["question"], self.fonts["question"], 
-                       self.colors["WHITE"], self.width / 2, 100, max_width=600)
+                self.colors["WHITE"], self.width / 2, 100, max_width=600)
 
         # Timer display (top left)
-        timer_color = self.colors["GREEN"] # Green timer
+        timer_color = self.colors["GREEN"]
         if time_left <= 10:
-            timer_color = (255, 215, 0)  # Yellow once half the time is gone
+            timer_color = (255, 215, 0)
         if time_left <= 5:
-            timer_color = self.colors["RED"]  # Red when user only has 5 secs left
+            timer_color = self.colors["RED"]
+
         padding = 20
         timer_text = f"Time Left: {time_left}s"
         self.draw_text(timer_text, self.fonts["option"], timer_color,
-                       padding + self.fonts["option"].size(timer_text)[0]/2,
-                       padding + self.fonts["option"].get_height()/2)
+                padding + self.fonts["option"].size(timer_text)[0]/2,
+                padding + self.fonts["option"].get_height()/2)
 
         # Score display (top right)
         score_text = f"Points: {self.score}/{len(self.questions)}"
         self.draw_text(score_text, self.fonts["option"], self.colors["GREEN"],
-                        self.width - 120, 30)
+                self.width - 120, 30)
 
         # Answer buttons
         for i, option in enumerate(q["options"]):
             self.draw_button(option, self.width / 2 - 150, 200 + i * 80, 300, 60,
-                             self.colors["BLUE"], self.colors["GREEN"], 
-                             lambda i=i: self.handle_answer(i))
+                    self.colors["BLUE"], self.colors["GREEN"], 
+                    lambda i=i: self.handle_answer(i))
+
+        # Reset click release so user can click immediately next question
+        mouse = pygame.mouse.get_pressed()[0]
+        if not mouse:
+            self.click_released = True
+

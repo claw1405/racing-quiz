@@ -144,7 +144,7 @@ class Quiz:
         time_left = self.get_time_left()
 
         # Only play tick sound if the second changed
-        if time_left != self.last_time_displayed:
+        if time_left != self.last_time_displayed and not self.feedback:
             self.last_time_displayed = time_left
             if "timer_tick" in self.sounds:
                 self.sounds["timer_tick"].play()

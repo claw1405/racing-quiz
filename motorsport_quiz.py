@@ -16,7 +16,7 @@ class MotorSportQuiz:
         pygame.display.set_caption("Grand Prix Trivia")
 
         #Load the mixer
-        pygame.mixer.init()
+        pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=512)
 
         # Fonts & Colors
         self.fonts = {
@@ -116,13 +116,13 @@ class MotorSportQuiz:
                 if event.type == pygame.QUIT: 
                     running = False
 
-                # Render the current screen based on state
-                if self.state == self.STATE_MENU:
-                    self.menu_screen_obj.render()
-                elif self.state == self.STATE_PLAYING and self.quiz_screen_obj:
-                    self.quiz_screen_obj.render()
-                elif self.state == self.STATE_SCORE and self.score_screen_obj:
-                    self.score_screen_obj.render()
+            # Render the current screen based on state
+            if self.state == self.STATE_MENU:
+                self.menu_screen_obj.render()
+            elif self.state == self.STATE_PLAYING and self.quiz_screen_obj:
+                self.quiz_screen_obj.render()
+            elif self.state == self.STATE_SCORE and self.score_screen_obj:
+                self.score_screen_obj.render()
 
             pygame.display.flip()
             self.clock.tick(30)

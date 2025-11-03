@@ -24,6 +24,7 @@ class Quiz:
         # Setup Timer
         self.time_limit = 20
         self.start_time = time.time()
+        self.last_time_displayed = self.time_limit
 
         # Feedback screen setup to give user real time feedback on the 
         # correctness of their answer.
@@ -33,6 +34,8 @@ class Quiz:
     def reset_timer(self):
         """Reset the question timer"""
         self.start_time = time.time()
+        self.last_time_displayed = self.time_limit
+
 
     def get_time_left(self):
         """Calculate how much time the user has to answer the question"""
@@ -118,7 +121,7 @@ class Quiz:
         the screen"""
         # --- Feedback display ---
         if self.feedback:
-            if time.time() - self.feedback_time < 0.7:  # Show for 1.5s
+            if time.time() - self.feedback_time < 0.5:
                 self.screen.fill(self.colors["BLACK"])
                 text, color = self.feedback
                 self.draw_text(text, self.fonts["question"], color, 
@@ -139,15 +142,19 @@ class Quiz:
 
         # --- Timer logic ---
         time_left = self.get_time_left()
+
+        # Only play tick sound if the second changed
+        if time_left != self.last_time_displayed:
+            self.last_time_displayed = time_left
+            if "timer_tick" in self.sounds:
+                self.sounds["timer_tick"].play()
+
+        # Time's up — move to next question only once
         if time_left <= 0:
-            # Time's up — move to next question
-            self.current_question += 1
-            if self.current_question >= len(self.questions):
-                self.finish_callback(self.score)
-                return
-            else:
-                self.reset_timer()
-                time_left = self.time_limit
+            self.feedback = (f"Time's up! Correct: {q['options'][q['answer']]}", self.colors["RED"])
+            self.feedback_time = time.time()
+            return  # Show feedback for this question before advancing
+
 
         # --- Draw UI ---
         self.screen.fill(self.colors["BLACK"])

@@ -10,10 +10,8 @@ class Menu:
         self.font_title = fonts["title"]
         self.font_option = fonts["option"]
         self.colors = colors
-        self.start_quiz = start_action
         self.start_quiz_callback = start_action
-
-        self.mouse_clicked = False # Flag to track mouse clicks
+        self.mouse_clicked = False  # Track click state
 
     def draw_text(self, text, font, color, x, y):
         """Render text to the screen"""
@@ -25,20 +23,23 @@ class Menu:
         """Draw menu buttons and listen for click events"""
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()[0]
-        if x + w > mouse[0] > x and y + h > mouse[1] > y:
-            pygame.draw.rect(self.screen, hover_color, (x, y, w, h))
-            if click and not self.mouse_clicked and action is not None:
-                action()
-            self.mouse_clicked = click
-        else:
-            pygame.draw.rect(self.screen, color, (x, y, w, h))
+        hovered = x + w > mouse[0] > x and y + h > mouse[1] > y
+
+        pygame.draw.rect(self.screen, hover_color if hovered else color, 
+                        (x, y, w, h), border_radius=10)
+
+        if hovered and click and not self.mouse_clicked and action:
+            action()
+            self.mouse_clicked = True
 
         if not click:
             self.mouse_clicked = False
 
-        self.draw_text(text, self.font_option, self.colors["WHITE"], x + w / 2, y + h / 2)
+        self.draw_text(text, self.font_option, self.colors["WHITE"], 
+                       x + w / 2, y + h / 2)
 
-    def render(self):
+    def render(self, events=None):
+        """Draw the menu screen"""
         self.screen.fill(self.colors["BLACK"])
 
         categories = [
@@ -49,25 +50,25 @@ class Menu:
         ]
 
         button_height = 60
+        button_width = 200
         spacing = 20
         title_height = self.font_title.get_height()
-        buttons_height = len(categories) * button_height
-        quit_height = button_height
-
-        total_height = title_height + spacing + buttons_height + spacing + quit_height + spacing * (len(categories) + 1)
+        total_height = (title_height + spacing + len(categories) * 
+                    (button_height + spacing) + button_height)
         start_y = (self.height - total_height) / 2
 
-        # Draw title
-        self.draw_text("Grand Prix Trivia", self.font_title, self.colors["WHITE"], self.width / 2, start_y + title_height / 2)
+        # Draw Title text
+        self.draw_text("Grand Prix Trivia", self.font_title, 
+            self.colors["WHITE"], self.width / 2, start_y + title_height / 2)
 
-        # Draw category buttons
+        # Category buttons
         current_y = start_y + title_height + spacing
         for name, path in categories:
             self.draw_button(
                 name,
-                self.width / 2 - 100,
+                self.width / 2 - button_width / 2,
                 current_y,
-                200,
+                button_width,
                 button_height,
                 self.colors["BLUE"],
                 self.colors["GREEN"],
@@ -75,7 +76,7 @@ class Menu:
             )
             current_y += button_height + spacing
 
-        # Draw Quit button
+        # Quit button
         self.draw_button(
             "Quit",
             self.width / 2 - 100,
@@ -86,6 +87,3 @@ class Menu:
             self.colors["GREY"],
             sys.exit
         )
-
-
-

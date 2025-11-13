@@ -3,7 +3,7 @@ import pygame, sys
 class ScoreScreen:
     """Score display screen"""
     def __init__(self, screen, width, height, fonts, colors, score, 
-                 total_questions, restart_action):
+                 total_questions, restart_action, questions=None):
         """Initialize attribute required by the score screen"""
         self.screen = screen
         self.width = width
@@ -14,6 +14,8 @@ class ScoreScreen:
         self.total_questions = total_questions
         self.restart_action = restart_action
         self.mouse_clicked = False
+
+        self.questions = questions
 
     def draw_text(self, text, font, color, x, y):
         """Render text to the screen and position it"""
@@ -40,7 +42,7 @@ class ScoreScreen:
         self.draw_text(text, self.fonts["option"], self.colors["WHITE"], 
                        x + w / 2, y + h / 2)
 
-    def render(self):
+    def render(self, events=None):
         """Render the users score as well as the play again and quit buttons"""
         self.screen.fill(self.colors["BLACK"])
         self.draw_text("Quiz Complete!", self.fonts["title"], self.colors["WHITE"], self.width / 2, self.height / 3)

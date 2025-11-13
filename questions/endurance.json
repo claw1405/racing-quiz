@@ -2,101 +2,121 @@
     {
         "question": "Which famous 24-hour race takes place at the Circuit de la Sarthe?",
         "options": ["24 Hours of Nürburgring", "24 Hours of Daytona", "24 Hours of Le Mans", "Spa 24 Hours"],
-        "answer": 2
+        "answer": 2,
+        "fact": "Circuit de la Sarthe, home of the 24 Hours of Le Mans, is a part-permanent, part-public-road circuit stretching over 13.6 km (8.5 miles) — making it one of the longest tracks in the world."
     },
     {
         "question": "Which manufacturer has won the most 24 Hours of Le Mans overall titles?",
         "options": ["Porsche", "Audi", "Ferrari", "Toyota"],
-        "answer": 0
+        "answer": 0, 
+        "fact": "Porsche holds the record for the most overall wins at the 24 Hours of Le Mans, with 19 victories. Their first came in 1970, and their dominance has spanned over five decades of endurance racing excellence."
     },
     {
         "question": "In which country is the Spa 24 Hours endurance race held?",
         "options": ["France", "Belgium", "Germany", "Italy"],
-        "answer": 1
+        "answer": 1,
+        "fact": "The 24 Hours of Spa, held at Circuit de Spa-Francorchamps in Belgium, was first run in 1924 — just a year after Le Mans. It’s famous for its Ardennes weather, where sunshine and rain can strike different parts of the track at the same time."
     },
     {
         "question": "What does WEC stand for in endurance racing?",
         "options": ["World Endurance Championship", "World Engine Competition", "World Elite Cup", "World Energy Challenge"],
-        "answer": 0
+        "answer": 0,
+        "fact": "The FIA World Endurance Championship (WEC) began in 2012, bringing together legendary endurance races like the 24 Hours of Le Mans under one global series. It tests both speed and durability, with teams competing across multiple countries and time zones."
     },
     {
         "question": "Which car manufacturer introduced the TS050 Hybrid for endurance racing?",
         "options": ["Nissan", "Toyota", "Mazda", "Honda"],
-        "answer": 1
+        "answer": 1,
+        "fact": "Toyota introduced the TS050 Hybrid in 2016 for the FIA World Endurance Championship. It featured a 2.4-liter twin-turbo V6 engine combined with a hybrid electric system, showcasing Toyota’s advanced hybrid technology that later influenced their road cars."
     },
     {
         "question": "Which American race is considered the opening round of the IMSA WeatherTech Championship?",
         "options": ["12 Hours of Sebring", "Petit Le Mans", "24 Hours of Daytona", "6 Hours of Watkins Glen"],
-        "answer": 2
+        "answer": 2,
+        "fact": "The Rolex 24 at Daytona, held at Daytona International Speedway in Florida, is considered the opening round of the IMSA WeatherTech SportsCar Championship. It’s a 24-hour endurance race that attracts top teams and drivers from around the world, often compared to Le Mans for its prestige and challenge."
     },
     {
         "question": "What class replaced LMP1 in the FIA World Endurance Championship in 2021?",
         "options": ["LMDh", "Hypercar", "GT3", "Prototype Evo"],
-        "answer": 1
+        "answer": 1,
+        "fact": "In 2021, the Hypercar class (Le Mans Hypercar or LMH) replaced LMP1 as the top category in the FIA World Endurance Championship. The change aimed to reduce costs while encouraging greater manufacturer involvement, with entries from brands like Toyota, Peugeot, Ferrari, and Porsche."
     },
     {
         "question": "Which legendary driver has won the 24 Hours of Le Mans nine times?",
         "options": ["Tom Kristensen", "Jacky Ickx", "Allan McNish", "Emanuele Pirro"],
-        "answer": 0
+        "answer": 0,
+        "fact": "Tom Kristensen, a Danish racing driver, holds the record for the most 24 Hours of Le Mans victories with nine wins between 1997 and 2013. He’s known as “Mr. Le Mans” for his incredible consistency and dominance in endurance racing."
     },
     {
         "question": "What type of race is the 12 Hours of Sebring?",
         "options": ["Street race", "Endurance race", "Sprint race", "Drag race"],
-        "answer": 1
+        "answer": 1,
+        "fact": "The 12 Hours of Sebring is a sports car endurance race held annually at Sebring International Raceway in Florida. It tests both speed and reliability, with teams racing continuously for 12 hours."
     },
     {
         "question": "Which manufacturer won Le Mans with the GT40 in the 1960s?",
         "options": ["Ferrari", "Porsche", "Ford", "Aston Martin"],
-        "answer": 2
+        "answer": 2,
+        "fact": "Ford won the 24 Hours of Le Mans in the 1960s with the GT40, famously beating Ferrari and securing four consecutive victories from 1966 to 1969."
     },
     {
         "question": "What fuel technology do many modern endurance prototypes use?",
         "options": ["Diesel-electric hybrid", "Pure petrol", "Hydrogen", "Bioethanol"],
-        "answer": 0
+        "answer": 0,
+        "fact": "Many modern endurance prototypes, such as those in the FIA World Endurance Championship, use hybrid powertrains combining internal combustion engines with electric energy recovery systems, improving efficiency and performance over long races."
     },
     {
         "question": "Which race completes the endurance ‘Triple Crown’ alongside Le Mans and Monaco?",
         "options": ["Indianapolis 500", "Daytona 500", "Spa 24 Hours", "Bathurst 1000"],
-        "answer": 0
+        "answer": 0,
+        "fact": "The Monaco GP is part of motorsport’s Triple Crown, alongside the Indy 500 and 24 Hours of Le Mans. Only a few drivers, like Graham Hill, have ever achieved this."
     },
     {
-        "question": "Which British manufacturer won Le Mans in 2003 with the Bentley Speed 8?",
+        "question": "Which British manufacturer won Le Mans in 2003 with the Speed 8?",
         "options": ["McLaren", "Bentley", "Aston Martin", "Jaguar"],
-        "answer": 1
+        "answer": 1,
+        "fact": "Bentley won the 2003 24 Hours of Le Mans with the Speed 8, marking the brand’s first overall victory at Le Mans since 1930."
     },
     {
         "question": "How long does the 6 Hours of Fuji race last?",
         "options": ["6 hours", "8 hours", "10 hours", "12 hours"],
-        "answer": 0
+        "answer": 0,
+        "fact": "The 6 Hours of Fuji is an endurance race held at Japan’s Fuji Speedway, lasting exactly six hours as part of the FIA World Endurance Championship (WEC) calendar."
     },
     {
         "question": "Which brand’s R18 e-tron quattro dominated Le Mans in the early 2010s?",
         "options": ["Porsche", "Toyota", "Audi", "Peugeot"],
-        "answer": 2
+        "answer": 2, 
+        "fact": "Audi’s R18 e-tron quattro was a hybrid prototype that dominated the 24 Hours of Le Mans in the early 2010s, winning multiple times thanks to its innovative diesel-electric hybrid technology and advanced aerodynamics."
     },
     {
         "question": "In endurance racing, what does ‘double stinting tyres’ mean?",
         "options": ["Using the same tyres for two driver stints", "Driving two stints without refueling", "Racing two events in a row", "Changing tyres twice in one stop"],
-        "answer": 0
+        "answer": 0,
+        "fact": "In endurance racing, “double stinting tyres” means using the same set of tyres for two consecutive driving stints instead of changing them after just one. This strategy helps teams save time in the pits and manage tyre wear over long races."
     },
     {
         "question": "What is the name of the night-time endurance race held in Georgia, USA?",
         "options": ["Petit Le Mans", "Mid-Ohio 6 Hours", "Road America 500", "Sebring Sprint"],
-        "answer": 0
+        "answer": 0, 
+        "fact": "The night-time endurance race held in Georgia, USA is the 12 Hours of Sebring, one of the most historic sports car races in North America, famous for its challenging track surface and grueling duration."
     },
     {
         "question": "Which driver famously won Le Mans for Toyota after multiple near misses?",
         "options": ["Fernando Alonso", "Kazuki Nakajima", "Mike Conway", "Kamui Kobayashi"],
-        "answer": 1
+        "answer": 1,
+        "fact": "Mike Conway, Kamui Kobayashi, and José María López were part of the Toyota team that finally won Le Mans in 2018, ending Toyota’s long streak of near misses at the 24 Hours of Le Mans."
     },
     {
         "question": "What does the acronym LMDh stand for?",
         "options": ["Le Mans Daytona hybrid", "Lightweight Motorsport Design hybrid", "Long-distance Motorsport hybrid", "Le Mans Development hybrid"],
-        "answer": 0
+        "answer": 0,
+        "fact": "LMDh stands for Le Mans Daytona hybrid, which is a prototype racing category introduced to allow manufacturers to compete in both the IMSA WeatherTech SportsCar Championship and the FIA World Endurance Championship with the same car."
     },
     {
         "question": "What time of day does the 24 Hours of Le Mans traditionally start?",
         "options": ["Noon", "3 PM", "4 PM", "Midnight"],
-        "answer": 1 
+        "answer": 1,
+        "fact": "The 24 Hours of Le Mans traditionally starts in the afternoon, usually at 3:00 PM local time on a Saturday, allowing the race to run continuously through day and night until the following day."
     }
 ]

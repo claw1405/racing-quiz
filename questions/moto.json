@@ -2,101 +2,121 @@
     {
         "question": "Who holds the record for the most MotoGP World Championships?",
         "options": ["Valentino Rossi", "Marc Márquez", "Giacomo Agostini", "Mick Doohan"],
-        "answer": 2
+        "answer": 2,
+        "fact": "The record for the most MotoGP (premier class) World Championships is held by Giacomo Agostini, who won 8 premier-class titles and 15 world championships overall across all classes."
     },
     {
         "question": "Which manufacturer runs the famous 'Desmosedici' MotoGP bike?",
         "options": ["Yamaha", "Honda", "Suzuki", "Ducati"],
-        "answer": 3
+        "answer": 3,
+        "fact": "The Desmosedici is the MotoGP bike run by Ducati, an Italian manufacturer famous for its V4 engine design and racing success in the premier class."
     },
     {
         "question": "What country hosts the Mugello Circuit?",
         "options": ["Spain", "Italy", "France", "Portugal"],
-        "answer": 1
+        "answer": 1,
+        "fact": "The Mugello Circuit is hosted in Italy, in the Tuscany region, and is owned by Ferrari, often used for MotoGP and Formula 1 testing."
     },
     {
         "question": "Which rider is nicknamed 'The Doctor'?",
         "options": ["Marc Márquez", "Casey Stoner", "Valentino Rossi", "Jorge Lorenzo"],
-        "answer": 2
+        "answer": 2,
+        "fact": "The rider nicknamed 'The Doctor' is Valentino Rossi, an Italian MotoGP legend known for his multiple world championships and charismatic personality on and off the track."
     },
     {
         "question": "Which Japanese manufacturer left MotoGP at the end of the 2022 season?",
         "options": ["Suzuki", "Yamaha", "Kawasaki", "Honda"],
-        "answer": 0
+        "answer": 0,
+        "fact": "Suzuki, a major Japanese manufacturer in MotoGP, exited the championship at the end of 2022, ending its factory team operations despite previously winning multiple rider and constructor titles."
     },
     {
         "question": "What is the premier class in motorcycle Grand Prix racing called?",
         "options": ["Moto1", "MotoGP", "Superbike", "GPX"],
-        "answer": 1
+        "answer": 1,
+        "fact": "The premier class in motorcycle Grand Prix racing is called MotoGP. It features the fastest bikes, cutting-edge technology, and the top riders in the world, making it the pinnacle of motorcycle road racing."
     },
     {
         "question": "Which tire manufacturer currently supplies MotoGP?",
         "options": ["Pirelli", "Michelin", "Bridgestone", "Dunlop"],
-        "answer": 1
+        "answer": 1,
+        "fact": "Michelin is the current tire supplier for MotoGP. They returned as the sole official tire provider in 2016, providing high-performance tires specifically designed for the extreme speeds and cornering demands of the championship."
     },
     {
         "question": "Which circuit hosts the season-opening Qatar Grand Prix?",
         "options": ["Losail International Circuit", "Sepang Circuit", "Circuit of the Americas", "Buriram Circuit"],
-        "answer": 0
+        "answer": 0,
+        "fact": "The Losail International Circuit in Qatar hosts the season-opening MotoGP Grand Prix. The track is famous for its floodlit night races, creating a spectacular spectacle under the lights."
     },
     {
         "question": "Who was the 2023 MotoGP World Champion?",
         "options": ["Fabio Quartararo", "Jorge Martín", "Pecco Bagnaia", "Marc Márquez"],
-        "answer": 2
+        "answer": 2,
+        "fact": "Francesco Bagnaia won the 2023 MotoGP World Championship, becoming the first Italian rider since Valentino Rossi to claim the premier class title with Ducati."
     },
     {
         "question": "Which rider won back-to-back MotoGP titles in 2018 and 2019?",
         "options": ["Marc Márquez", "Andrea Dovizioso", "Jorge Lorenzo", "Valentino Rossi"],
-        "answer": 0
+        "answer": 0,
+        "fact": "Marc Márquez won back-to-back MotoGP World Championships in 2018 and 2019, continuing his dominance with the Repsol Honda Team."
     },
     {
         "question": "Which team is known as the Repsol Honda Team?",
         "options": ["Ducati Factory Team", "Yamaha Factory Racing", "Honda Factory Team", "Suzuki Ecstar"],
-        "answer": 2
+        "answer": 2,
+        "fact": "The Repsol Honda Team is the factory MotoGP team of Honda, sponsored by the Spanish energy company Repsol. It has been one of the most successful teams in MotoGP history, producing multiple world champions like Marc Márquez and Dani Pedrosa."
     },
     {
         "question": "What is the typical engine capacity for MotoGP bikes?",
         "options": ["500cc", "800cc", "1000cc", "1200cc"],
-        "answer": 2
+        "answer": 2,
+        "fact": "Modern MotoGP bikes have a maximum engine capacity of 1000cc for four-stroke engines. This allows them to produce over 250 horsepower and reach speeds of over 350 km/h (217 mph) on straights."
     },
     {
         "question": "Which circuit is nicknamed 'The Cathedral of Speed'?",
         "options": ["Assen", "Silverstone", "Misano", "Jerez"],
-        "answer": 0
+        "answer": 0,
+        "fact": "The TT Circuit Assen in the Netherlands is nicknamed “The Cathedral of Speed” due to its long history in motorcycle racing and its status as one of the most prestigious tracks in MotoGP."
     },
     {
         "question": "Who was the first MotoGP World Champion in the four-stroke era (2002)?",
         "options": ["Valentino Rossi", "Max Biaggi", "Loris Capirossi", "Nicky Hayden"],
-        "answer": 0
+        "answer": 0,
+        "fact": "The first MotoGP World Champion in the four-stroke era (2002) was Valentino Rossi, riding for Honda."
     },
     {
         "question": "What color flag indicates a wet race in MotoGP?",
-        "options": ["Red", "Blue", "White", "Green"],
-        "answer": 2
+        "options": ["Red", "Blue", "yellow and red", "Green"],
+        "answer": 2,
+        "fact": "In MotoGP, a wet track is indicated by a yellow flag with red stripes, warning riders of slippery conditions."
     },
     {
         "question": "Which Spanish circuit is known for its tight corners and close racing?",
         "options": ["Jerez", "Aragon", "Barcelona-Catalunya", "Valencia"],
-        "answer": 0
+        "answer": 0,
+        "fact": "The Jerez Circuit is renowned for its tight corners and technical layout, producing some of the closest and most exciting racing in MotoGP."
     },
     {
         "question": "Who won the MotoGP title in 2006 for Honda?",
         "options": ["Nicky Hayden", "Dani Pedrosa", "Valentino Rossi", "Casey Stoner"],
-        "answer": 0
+        "answer": 0,
+        "fact": "In 2006, the MotoGP World Championship was won by Nicky Hayden, riding for Repsol Honda, marking his only premier-class title."
     },
     {
         "question": "Which circuit replaced the Finnish GP on the 2023 calendar?",
         "options": ["Kazakhstan GP", "Indonesia GP", "Portugal GP", "India GP"],
-        "answer": 3
+        "answer": 3,
+        "fact": "The Finnish GP was canceled for 2023, and the MotoGP calendar added the Indian Grand Prix at the Buddh International Circuit as its replacement."
     },
     {
         "question": "Which country is Marc Márquez from?",
         "options": ["Spain", "Italy", "France", "Argentina"],
-        "answer": 0
+        "answer": 0,
+        "fact": "Marc Márquez is from Spain. He was born in Cervera, Catalonia, and has won multiple MotoGP World Championships representing his country."
     },
     {
         "question": "Which rider has a signature number 46?",
         "options": ["Casey Stoner", "Valentino Rossi", "Fabio Quartararo", "Joan Mir"],
-        "answer": 1
+        "answer": 1,
+        "fact": "The signature number 46 belongs to Valentino Rossi, one of the most successful and iconic MotoGP riders in history."
     }
 ]

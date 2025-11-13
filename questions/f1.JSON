@@ -2,107 +2,128 @@
     {
         "question": "Which team has won the most Constructors’ Championships in Formula 1?",
         "options": ["Ferrari", "Mercedes", "McLaren", "Red Bull"],
-        "answer": 0
+        "answer": 0,
+        "fact": "Ferrari have won a total of 16 Constructors championships. Followed by Mclaren with 10."
     },
     {
         "question": "In which year was the first Formula 1 World Championship held?",
         "options": ["1946", "1950", "1952", "1954"],
-        "answer": 1
+        "answer": 1,
+        "fact": "Giuseppe 'Nino' Farina won the 1950 British Grand Prix, the first-ever Formula 1 World Championship race, driving an Alfa Romeo."
     },
     {
         "question": "Who won the 2023 Formula 1 Drivers’ Championship?",
         "options": ["Lewis Hamilton", "Max Verstappen", "Charles Leclerc", "Lando Norris"],
-        "answer": 1
+        "answer": 1,
+        "fact": "Max Verstappen dominated the 2023 Formula 1 season, winning 19 out of 22 races and securing his third consecutive World Drivers’ Championship with several rounds to spare"
     },
     {
         "question": "Which Grand Prix is traditionally known as the 'jewel in the crown' of Formula 1?",
         "options": ["Monaco Grand Prix", "Italian Grand Prix", "British Grand Prix", "Singapore Grand Prix"],
-        "answer": 0
+        "answer": 0,
+        "fact": "First held in 1929, Monaco is one of the oldest and most historic Grands Prix, with winners like Senna, Prost, and Schumacher becoming legends there."
     },
     {
         "question": "What type of engine configuration do current F1 cars use?",
         "options": ["V8", "V10", "V6 Turbo Hybrid", "Inline-4"],
-        "answer": 2
+        "answer": 2,
+        "fact": "Modern F1 cars use a 1.6-litre V-6 turbocharged internal-combustion engine paired with hybrid electric systems, and together they can produce around 1,000 horsepower at peak output."
     },
     {
         "question": "Who was the first ever Formula 1 World Champion?",
         "options": ["Juan Manuel Fangio", "Alberto Ascari", "Giuseppe Farina", "Stirling Moss"],
-        "answer": 2
+        "answer": 2,
+        "fact": "Giuseppe Farina was the first ever Formula 1 World Champion, winning the inaugural 1950 season with Alfa Romeo."
     },
     {
         "question": "What does the term ‘DRS’ stand for in Formula 1?",
         "options": ["Drag Reduction System", "Downforce Regulation Setup", "Dynamic Race Strategy", "Driver Response System"],
-        "answer": 0
+        "answer": 0,
+        "fact": "DRS, introduced in 2011, allows F1 drivers to open a flap in the rear wing to reduce aerodynamic drag, increasing straight-line speed by up to 10–12 km/h"
     },
     {
         "question": "Which circuit hosts the British Grand Prix?",
         "options": ["Silverstone", "Brands Hatch", "Donington Park", "Goodwood"],
-        "answer": 0
+        "answer": 0,
+        "fact": "Silverstone hosted the very first Formula 1 World Championship race on May 13, 1950, won by Giuseppe Farina driving for Alfa Romeo. The circuit was originally a World War II airfield, and parts of the old runways are still part of the track today."
     },
     {
         "question": "Who is the youngest driver ever to start a Formula 1 race?",
         "options": ["Sebastian Vettel", "Lando Norris", "Max Verstappen", "Charles Leclerc"],
-        "answer": 2
+        "answer": 2,
+        "fact": "The youngest driver ever to start a Formula 1 Grand Prix is Max Verstappen, who made his debut at the 2015 Australian Grand Prix at just 17 years and 166 days old."
     },
     {
         "question": "Which driver famously said, 'If you no longer go for a gap that exists, you’re no longer a racing driver'?",
         "options": ["Ayrton Senna", "Michael Schumacher", "Lewis Hamilton", "Niki Lauda"],
-        "answer": 0
+        "answer": 0,
+        "fact": "Ayrton Senna is widely regarded as one of the greatest F1 drivers of all time, with 65 pole positions and 41 Grand Prix wins."
     },
     {
         "question": "How many points does a driver get for finishing 1st place in a Grand Prix?",
         "options": ["25", "20", "18", "30"],
-        "answer": 0
+        "answer": 0,
+        "fact": "In modern Formula 1, the winner of a Grand Prix receives 25 championship points, with descending points awarded to the top 10 finishers (18 for 2nd, 15 for 3rd, down to 1 point for 10th)"
     },
     {
         "question": "Which country hosts the Suzuka Circuit?",
         "options": ["Japan", "China", "South Korea", "Malaysia"],
-        "answer": 0
+        "answer": 0,
+        "fact": "The Suzuka Circuit in Japan is one of the few tracks in F1 that features a figure-eight layout, with the back straight passing over the front section via a bridge."
     },
     {
         "question": "Which F1 team uses the 'Silver Arrows' nickname?",
         "options": ["Mercedes", "McLaren", "Aston Martin", "Williams"],
-        "answer": 0
+        "answer": 0,
+        "fact": "Mercedes cars were nicknamed the “Silver Arrows” because in the 1930s, the team removed the white paint from their race cars to meet weight limits, leaving the shiny silver metal exposed. The sleek silver look gave them the nickname."
     },
     {
         "question": "Who won the dramatic 2008 Formula 1 World Championship by a single point?",
         "options": ["Felipe Massa", "Lewis Hamilton", "Kimi Räikkönen", "Fernando Alonso"],
-        "answer": 1
+        "answer": 1,
+        "fact": "Lewis Hamilton won his first World Drivers’ Championship in 2008 by just 1 point over Felipe Massa, clinching the title on the final lap of the last race in Brazil."
     },
     {
         "question": "At which circuit did Ayrton Senna win his first Formula 1 race?",
         "options": ["Estoril", "Monaco", "Interlagos", "Donington Park"],
-        "answer": 0
+        "answer": 0,
+        "fact": "Ayrton Senna won his first Grand Prix in 1985 at the Portuguese GP in Estoril, driving for Lotus."
     },
     {
         "question": "What color flag indicates the end of a Formula 1 race?",
         "options": ["Red", "Yellow", "Checkered", "Green"],
-        "answer": 2
+        "answer": 2,
+        "fact": "In Formula 1, the chequered flag signals the end of the race. Once the leader crosses the finish line under the chequered flag, the race is officially over, but cars must complete the full lap before returning to the pits."
     },
     {
         "question": "Which team did Max Verstappen make his Formula 1 debut with?",
         "options": ["Red Bull Racing", "Toro Rosso", "Mercedes", "Sauber"],
-        "answer": 1
+        "answer": 1,
+        "fact": "Max Verstappen made his Formula 1 debut in 2015 with the Scuderia Toro Rosso team at the Australian Grand Prix."
     },
     {
         "question": "Who was the last driver to win a championship for Ferrari?",
         "options": ["Fernando Alonso", "Kimi Räikkönen", "Sebastian Vettel", "Charles Leclerc"],
-        "answer": 1
+        "answer": 1,
+        "fact": "The last driver to win a championship for Ferrari was Kimi Raikkonen in 2007."
     },
     {
         "question": "Which F1 track is nicknamed 'The Temple of Speed'?",
         "options": ["Spa-Francorchamps", "Monza", "Silverstone", "Imola"],
-        "answer": 1
+        "answer": 1,
+        "fact": "Monza is called the “Temple of Speed” because of its high-speed layout with long straights and fast corners, which allows cars to reach some of the highest speeds on the F1 calendar. The nickname reflects the circuit’s history of record-breaking laps."
     },
     {
         "question": "What team did Jenson Button win the 2009 championship with?",
         "options": ["Mercedes", "Williams", "Brawn GP", "McLaren"],
-        "answer" : 2
+        "answer" : 2, 
+        "fact": "Brawn GP was a Formula 1 team that only existed for the 2009 season. Remarkably, in their debut and only season, they won both the Constructors’ and Drivers’ Championships with Jenson Button driving, after taking over the Honda F1 team that had withdrawn from the sport."
     },
     {
         "question":"Who won back to back championships in 2005 and 2006 breaking Schumacher's domination?",
         "options": ["Lewis Hamilton", "Alain Prost", "Sebastian Vettel", "Fernando Alonso"],
-        "answer": 3
+        "answer": 3,
+        "fact": "Fernando Alonso became the youngest double Formula 1 World Champion at the time by winning the 2005 and 2006 World Drivers’ Championships with Renault, breaking Michael Schumacher’s streak of dominance and ending Ferrari’s five-year championship run."
     }
 ]
 

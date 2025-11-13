@@ -1,62 +1,65 @@
 import pygame, time, random
 
 class Quiz:
-    """Handles question displays, answer selection, timer, and feedback."""
-    def __init__(self, screen, width, height, fonts, colors, questions, finish_callback, sounds):
-        """Initialize quiz attributes"""
+    """Handles question displays, answer selection, timer, feedback, and facts."""
+    def __init__(self, screen, width, height, fonts, colors, questions, finish_callback, sounds, menu_callback):
         self.screen = screen
         self.width = width
         self.height = height
         self.fonts = fonts
         self.colors = colors
         self.finish_callback = finish_callback
+        self.menu_callback = menu_callback
         self.current_question = 0
         self.score = 0
         self.click_released = True
         self.sounds = sounds
 
-        # Set individual channels for different sounds to stop them being interrupted
-        pygame.mixer.set_num_channels(8)  # More than enough
-        self.feedback_channel = pygame.mixer.Channel(0)  # For correct/wrong
-        self.timer_channel = pygame.mixer.Channel(1)     # For tick sounds
-        self.click_channel = pygame.mixer.Channel(2)     # For click sounds
+        # Sound channels
+        pygame.mixer.set_num_channels(8)
+        self.feedback_channel = pygame.mixer.Channel(0)
+        self.timer_channel = pygame.mixer.Channel(1)
+        self.click_channel = pygame.mixer.Channel(2)
 
-        # Limit to 20 random questions
-        if len(questions) > 20:
-            self.questions = random.sample(questions, 20)
-        else:
-            self.questions = questions
+        # Randomize or trim questions
+        self.questions = random.sample(questions, min(20, len(questions)))
 
-        # Setup Timer
+        # Timer setup
         self.time_limit = 20
         self.start_time = time.time()
         self.last_time_displayed = self.time_limit
 
-        # Feedback screen setup to give user real time feedback on the 
-        # correctness of their answer.
-        self.feedback = None  # tuple (text, color)
+        # Feedback setup
+        self.feedback = None
         self.feedback_time = 0
+        self.last_feedback_fact = None
+
+        # Option buttons
+        self.option_rects = []
+
+        # Menu button
+        self.menu_button_rect = pygame.Rect(20, self.height - 80, 100, 50)
+
+        self.ignore_mouse_until_released = True
 
     def reset_timer(self):
-        """Reset the question timer"""
         self.start_time = time.time()
         self.last_time_displayed = self.time_limit
 
-
     def get_time_left(self):
-        """Calculate how much time the user has to answer the question"""
         elapsed = time.time() - self.start_time
         return max(0, self.time_limit - int(elapsed))
 
     def draw_text(self, text, font, color, x, y, max_width=None, line_spacing=5):
-        """Draw text at (x, y). Wraps if max_width set."""
+        if not text:
+            return
         if max_width is None:
             text_obj = font.render(text, True, color)
             text_rect = text_obj.get_rect(center=(x, y))
             self.screen.blit(text_obj, text_rect)
             return
-        
-        # Wrap text
+
+        # Wrap text to fit within width
         words = text.split(' ')
         lines = []
         current_line = ''
@@ -69,33 +72,35 @@ class Quiz:
                 current_line = word
         lines.append(current_line)
 
-        # Draw each line centered
-        total_height = len(lines) * font.get_height() + (len(lines) - 1) * line_spacing
+        total_height = len(lines) * font.get_height() + (len(lines)-1)*line_spacing
         start_y = y - total_height / 2
         for i, line in enumerate(lines):
             text_obj = font.render(line, True, color)
-            text_rect = text_obj.get_rect(center=(x, start_y + i * (font.get_height() + line_spacing)))
+            text_rect = text_obj.get_rect(center=(x, start_y + i*(font.get_height()+line_spacing)))
             self.screen.blit(text_obj, text_rect)
 
     def draw_button(self, text, x, y, w, h, color, hover_color, action=None):
-        """Draw each option button and listen for any click events"""
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()[0]
 
-        hovered = x + w > mouse[0] > x and y + h > mouse[1] > y
-        current_colour = hover_color if hovered else color
-        pygame.draw.rect(self.screen, current_colour, (x, y, w, h))
+         # Ignore clicks carried over from previous screen
+        if self.ignore_mouse_until_released:
+            if not click:
+                self.ignore_mouse_until_released = False
+            return
 
-        # Listen for click events
-        if hovered and click and self.click_released and not self.feedback:
-            pygame.mixer.Sound.play(self.sounds["click"])
+        hovered = x < mouse[0] < x + w and y < mouse[1] < y + h
+        current_color = hover_color if hovered else color
+        pygame.draw.rect(self.screen, current_color, (x, y, w, h))
+
+        if hovered and click and self.click_released and not self.feedback and action:
+            self.click_channel.play(self.sounds["click"])
             action()
             self.click_released = False
 
         if not click:
             self.click_released = True
 
-        # Setup option buttons
         font = self.fonts["option"]
         text_width = font.size(text)[0]
         while text_width > w - 10 and font.get_height() > 10:
@@ -105,101 +110,122 @@ class Quiz:
         self.draw_text(text, font, self.colors["WHITE"], x + w / 2, y + h / 2)
 
     def handle_answer(self, selected):
-        """A method to check the correctness of an answer"""
-        correct_index = self.questions[self.current_question]["answer"]
-        correct_text = self.questions[self.current_question]["options"][correct_index]
+        q = self.questions[self.current_question]
+        correct_index = q["answer"]
+        correct_text = q["options"][correct_index]
 
-        # If answer is correct output correct text else output incorrect and the
-        #correct answer.
         if selected == correct_index:
             self.score += 1
             self.feedback = ("Correct!", self.colors["GREEN"])
             self.feedback_channel.play(self.sounds["correct"])
-
         else:
-            self.feedback = (f"Incorrect! Correct: {correct_text}", self.colors["RED"])
+            self.feedback = ("Incorrect!", self.colors["RED"])
             self.feedback_channel.play(self.sounds["wrong"])
-        
-        self.feedback_time = time.time() 
 
-    def render(self):
-        """Render the quiz: questions, timer, score, and feedback."""
+        # Include fact if available
+        self.last_feedback_fact = q.get("fact", f"Correct answer: {correct_text}")
+        self.feedback_time = time.time()
+
+    def handle_events(self, events):
+        for event in events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+
+                # Menu button click
+                if self.menu_button_rect.collidepoint(mouse_pos):
+                    if self.timer_channel.get_busy():
+                        self.timer_channel.stop()
+                    self.menu_callback()
+                    return
+
+                # Option buttons
+                for i, rect in enumerate(self.option_rects):
+                    if rect.collidepoint(mouse_pos):
+                        self.handle_answer(i)
+
+    def render(self, events=None):
         if self.current_question >= len(self.questions):
-            return  # Quiz finished, nothing to render
+            return
 
-        q = self.questions[self.current_question]
-
-        # --- Feedback display ---
+        # --- Feedback screen ---
         if self.feedback:
-            if time.time() - self.feedback_time < 0.7:
+            if time.time() - self.feedback_time < 3.0:
+                if self.timer_channel.get_busy():
+                    self.timer_channel.stop()
                 self.screen.fill(self.colors["BLACK"])
                 text, color = self.feedback
-                self.draw_text(text, self.fonts["question"], color, 
-                    self.width / 2, self.height / 2)
+                self.draw_text(text, self.fonts["question"], color,
+                               self.width / 2, self.height / 2 - 50)
+                if self.last_feedback_fact:
+                    self.draw_text(self.last_feedback_fact, self.fonts["option"], 
+                                   self.colors["YELLOW"], self.width / 2, self.height / 2 + 60, max_width=700)
                 pygame.display.flip()
                 return
             else:
                 self.feedback = None
+                self.last_feedback_fact = None
                 self.current_question += 1
                 if self.current_question >= len(self.questions):
+                    if self.timer_channel.get_busy():
+                        self.timer_channel.stop()
                     self.finish_callback(self.score)
                     return
                 else:
                     self.reset_timer()
 
-        q = self.questions[self.current_question]  # Refresh current question after feedback
+        q = self.questions[self.current_question]
 
-        # --- Timer logic ---
+        # --- Timer ---
         time_left = self.get_time_left()
-
-        # Only play tick sound if the second changed and not during feedback
         if time_left != self.last_time_displayed:
             self.last_time_displayed = time_left
             if "timer_tick" in self.sounds and not self.feedback:
-               self.timer_channel.play(self.sounds["timer_tick"])
+                if not self.timer_channel.get_busy():
+                    self.timer_channel.play(self.sounds["timer_tick"])
 
-
-        # Time's up — show feedback once
         if time_left <= 0 and not self.feedback:
             correct_index = q["answer"]
             correct_text = q["options"][correct_index]
-            self.feedback = (f"Time's up! Correct: {correct_text}", self.colors["RED"])
+            self.feedback = ("Time's up!", self.colors["RED"])
+            self.last_feedback_fact = q.get("fact", f"Correct answer: {correct_text}")
             self.feedback_time = time.time()
-            return  # Wait to show feedback
+            return
 
-        # --- Draw UI ---
+        # --- Main quiz display ---
         self.screen.fill(self.colors["BLACK"])
 
         # Question
-        self.draw_text(q["question"], self.fonts["question"], 
-                self.colors["WHITE"], self.width / 2, 100, max_width=600)
+        self.draw_text(q["question"], self.fonts["question"], self.colors["YELLOW"],
+                       self.width / 2, 100, max_width=700)
 
-        # Timer display (top left)
+        # Timer
         timer_color = self.colors["GREEN"]
         if time_left <= 10:
             timer_color = (255, 215, 0)
         if time_left <= 5:
             timer_color = self.colors["RED"]
 
-        padding = 20
         timer_text = f"Time Left: {time_left}s"
-        self.draw_text(timer_text, self.fonts["option"], timer_color,
-                padding + self.fonts["option"].size(timer_text)[0]/2,
-                padding + self.fonts["option"].get_height()/2)
+        self.draw_text(timer_text, self.fonts["option"], timer_color, 100, 30)
 
-        # Score display (top right)
-        score_text = f"Points: {self.score}/{len(self.questions)}"
+        # Score
+        score_text = f"Score: {self.score}/{len(self.questions)}"
         self.draw_text(score_text, self.fonts["option"], self.colors["GREEN"],
-                self.width - 120, 30)
+                       self.width - 130, 30)
 
-        # Answer buttons
+        # Options
+        self.option_rects = []
         for i, option in enumerate(q["options"]):
-            self.draw_button(option, self.width / 2 - 150, 200 + i * 80, 300, 60,
-                    self.colors["BLUE"], self.colors["GREEN"], 
-                    lambda i=i: self.handle_answer(i))
+            rect = pygame.Rect(self.width / 2 - 150, 220 + i * 80, 300, 60)
+            self.option_rects.append(rect)
+            self.draw_button(option, rect.x, rect.y, rect.width, rect.height,
+                             self.colors["BLUE"], self.colors["GREEN"],
+                             lambda i=i: self.handle_answer(i))
 
-        # Reset click release so user can click immediately next question
-        mouse = pygame.mouse.get_pressed()[0]
-        if not mouse:
+        # Menu button
+        pygame.draw.rect(self.screen, self.colors["RED"], self.menu_button_rect)
+        self.draw_text("Menu", self.fonts["option"], self.colors["WHITE"],
+                       self.menu_button_rect.centerx, self.menu_button_rect.centery)
+
+        if not pygame.mouse.get_pressed()[0]:
             self.click_released = True
-
